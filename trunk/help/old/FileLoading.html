@@ -1,0 +1,27 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Loading State Data</B></font></p></td>
+  </tr>
+</table>
+<BR>
+<IMG src=FileMenu.gif>
+<P>The File Menu contains all commands related to the input and management of input data inside ParticleVis.  The primary file type is the state file.  A series of optional files augments the state file data, providing appearance, color classification, and even spatial data.</P>
+<DL>
+	<DT><B>Open State Datafile</B></DT>
+	<DD>The first option will bring up a file dialog that allows you to select an ASCII state file to be loaded into ParticleVis.  Once you have selected the file, the loading and parsing will take place as you watch.  You can view each frame of the data as it is loaded.  The performance of the renderer while file loading is still taking place may be choppier than normally.  Once the file has been fully loaded and processed, a message is displayed in the lower left corner of the render window.  If file loading fails, a failure message will appear instead.  For more information on state files see the File Formats section.</DD>
+	<DT><B>Open Particle Descriptor</B></DT>
+	<DD>The second entry in the File Menu will create a file dialog to select an XML particle descriptor file that contains specifications for the geometry of the loaded state data.  See the File Formats section for more information on creating these files.  Once the user has initiated the loading of a state datafile, selecting this command and picking an appropriate XML file will generate geometric primitives that are used to render the data, replacing the default appearance.<BR>
+<IMG src=LoadDescriptor.png>
+	</DD>
+	<DT><B>Open Vector File</B></DT>
+	<DD>The vector file type specifies a vector field, where any point in space may have a sampled vector tied to it that is rendered alongside the state data.  Options for controlling the appearance of vector files are similar to standard vector data found in statefiles.  See the description in File Formats for more information on the composition of vector files.</DD>
+	<DT><B>Load Color Map</B></DT>
+	<DD>Once the primary state datafile has been loaded and the particle descriptor has been (optionally) loaded, you may employ a color-map file to add color information to each particle of a frame by frame basis.  The Load Color Map command allows you to select a colormap file, which is described in File Formats.</DD>
+	<DT><B>Load Texture Map</B></DT>
+	<DD>This command allows you to select a bitmap file to replace the default texture.  When texturing is enabled this file is used to texture the surface of particles.  Bitmaps must be 24-bit and may be any dimension.   Textures with dimensions that are powers of two may provide better performance on graphics hardware.  See File Formats for more information.</DD>
+</DL>
+</BODY>
+</HTML>

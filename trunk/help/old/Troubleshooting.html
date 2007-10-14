@@ -1,0 +1,19 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Troubleshooting</B></font></p></td>
+  </tr>
+</table>
+<DL>
+<DT><B>I can't see the simulation data.</B></DT>
+<DD>Try running the "Auto Set Scene Options" command in the edit menu.  Next, you may check the Z depth variables and distance as described in Quick Start.  Make sure that the appropriate drawing modes are enabled in the View Menu.  Some graphics problems may be because video card does not support OpenGL, which is required.</DD>
+<DT><B>The program is rendering frames very slowly.</B></DT>
+<DD>Try reducing geometry complexity in the View Menu or turning on Point Sprite rendering.  Disabling textures and lighting may also help.  The primary factor of the speed of PVis is the capabilities of the system's graphics accelerator.  Newer and more powerful graphics cards will handle the OpenGL rendering of PVis with greater speed.  With a modern workstation ParticleVis should be able to render at realtime speeds even with tens of thousands of particles.</DD>
+<DT><B>The program loads data slowly.</B></DT>
+<DD>The load speed is determined by the speed of the hard drive being loaded from and the quantity of RAM available.  With larger datafiles even high performance I/O setups will take quite long, sometimes on the order of many minutes, to fully load the data.</DD>
+</DL>
+<P>For other problems you may email the author, <A href=mailto:vincent.hoon@gmail.com>Vincent Hoon</A>.</P>
+</BODY>
+</HTML>

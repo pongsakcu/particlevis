@@ -1,0 +1,13 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>File Threading Notes</B></font></p></td>
+  </tr>
+</table>
+<P>Whenever a statefile or a particle descriptor is loaded, ParticleVis will create a background I/O thread to handle the retrieval and parsing of these files.  Only a single statefile loading thread and a single particle descriptor thread can run concurrently with ParticleVis.  As the progress of file loading continues the data will become immediately available for visualization.</P>
+<P>To interrupt either of these processes, select "Terminate All File Processes" from the File menu.  All I/O threads will immediately be halted.  To continue loading the file you must reselect it using the appropriate File menu command.  If you wish to load a different statefile or XML file while another is loading, it is necessary to select this command first.</P>
+<P>To maximize the speed of file loading, it is possible to disable visualization entirely until the file is completed by selecting "Suspend Drawing Processes" from the File menu.  No rendering will occur while this option is enabled, but the control dialog will reflect the number of frames loaded.  Simply disable the option when you wish to visualize the data again.  This option is also useful if you wish to keep ParticleVis in the background without it consuming CPU cycles.</P>
+</BODY>
+</HTML>

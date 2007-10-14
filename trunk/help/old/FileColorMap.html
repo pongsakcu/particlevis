@@ -1,0 +1,18 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Color Maps</B></font></p></td>
+  </tr>
+</table>
+<P>The Color-Map file format allows ParticleVis to process external color information be to used in each frame of the simulation.  Additional data not present in the state file may be visualized using a color map.</P>
+<P>The format of a Color-Map is a series of lines taking the following form:<BR></P>
+<P><PRE>particle_number     frame_number     r     b     g</PRE></P>
+<P>particle_number is an integer corresponding to the index of the particle to be colored, and frame_number is an integer indicating the frame that the color should be applied.  r, g, and b are integers ranging from 0 to 255 that specify the red, blue, and green components of the color to be used.</P>
+<P>Each of these lines corresponding to an individual particle must be given in the order of increasing frame_number.  There is no restriction, however, on the order of the particle_number so long as the frames are given sequentially.  You do not need to specify each frame, as each color command is persistent.  Thus if you specify an initial color for each particle, then the particles will remain colored in this manner for the entire simulation.  Similarly if color commands are issued every 10 frames, the 9 frames following each command will retain the color of the earlier specification.</P>
+<IMG src=timeline.png>
+<P>Alternately, you may load the color map in a non-persistent format, such that only frames with colors specified will appear.
+All non-specified frames and particles will remain colored as they would be normally.</P>
+</BODY>
+</HTML>

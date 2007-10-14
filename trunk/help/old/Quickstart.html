@@ -1,0 +1,21 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Starting Out</B></font></p></td>
+  </tr>
+</table>
+<P>ParticleVis is purely a visualization tool, and as such it requires an external source of data.  It is designed to load large flat files of ASCII position data, denoted "state files."</P>
+<H3>Load in Data:</H3>
+<IMG src=FileMenu.gif>
+<P>Select "Open Datafile" from the File menu and select a datafile.  Once you begin loading the program may appear to stop responding, and will appear so until the file is fully loaded.  Generally loading in the data will take a significant amount of time.</P>
+<H3>Load Descriptor</H3>
+<P>The state file represents only particle position and orientation: the specification of particle appearance is stored in an XML descriptor file.  Select "Open Particle Descriptor" from the File menu and select the descriptor file that specifies the appearance of the currently loading particles.</P>
+<P>If a simple scene that is composed of uniformly sized spheres is being loaded, pointing to File->Set to Spheres will allow a fast shortcut to describing all particles as sphere of a radius that you specify.  In other cases you may wish to leave the default (unspecified) appearance of the particles, in which they appear as small colored axes.</P>
+<H3>Camera</H3>
+To quickly set camera parameters to a "best guess" state, select "Auto-set Scene Options" from the Edit menu or press the "a" key.  This will center the camera and set the depth bounds of the scene properly so that all loaded particles are visible.
+<BR>
+<P>At this point, you should be able to view the particle states.  See the other sections of this guide for further information.  If you are having problems, see the Troubleshooting section.</P>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<html>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>WaveFront OBJ File</B></font></p></td>
+  </tr>
+</table>
+<P>The WaveFront OBJ mesh files are arranged in a list format with three categories:</P>
+<ul>
+<li>Vertices (v)- 3D Points
+<li>Vertex normals (vn)- Define lighting angles for polygonal smoothing
+<li>Texture Vertices (vt)- Define texture coordinates
+<li>Faces (f)- Defined by vertices, vertex normals and texture vertices
+</ul>
+
+The order of listing implicitly defines the index of the element. For example, the first vertex listed is vertex 1.<br>
+Vertex normals correlate to vertex indices implicitly by position in the list, eg. the first vertex normal represents the first vertex.<br>
+Faces are defined by vertex indices. (See "Syntax" below for details)
+<p>
+<h3>Syntax</h3>
+<u>Vertex syntax:</u><br>
+      v [x] [y] [z]<br>
+<br>
+<u>Texture Vertex</u><br>
+	vt [u] [v] [w]<br>
+	where [u] is the horizontal direction, [v] is the vertical direction and [w] is the texture depth.<br>
+	[v] and [u] are optional arguments.<br>
+<br>
+<u>Vertex Normal Syntax:</u><br>
+      vn [x] [y] [z]<br>
+      where [x] [y] [z] form a unit vector.<br>
+<br>
+<u>Face Syntax:</u><br>
+      f [v1]/[vt1]/[vn1] [v2]/[vt2]/[vn2] [v3]/[vt3]/[vn3] ...<br>
+      This defines a face between the vertices [v1]-[v...] with texture vertices [vt1]-[vt...] and normals [vn1]-[vn...]<br>
+      [vn] and [vt] are optional arguments: f [v1] [v2] [v3] [v...] is valid.<br>
+<br>
+<u>Other:</u><br>
+      You may comment lines by starting with a #.<br>
+      You may specify geometry grouping:<br>
+            g [groupname]<br>
+            where [groupname] is a no-whitespace string.  ParticleVis does not employ this information.
+<p>
+<h3>Example</h3>
+The following is an example which defines a triangular face.<br>
+<hr>
+<pre>
+# Defines a triangle in 3-Space without meaningful normals
+# Texture vertices are defined but not used.
+g My_triangle
+v 0.000 0.000 0.000
+v 10.234 5.543 -6.001
+v 1.546 6.554 3.222
+vt 1 2
+vt 1 -1
+vt 0 1
+vn 0 0 1
+vn 0 0 1
+vn 0 0 1
+f 1//1 2//2 3//3
+</pre>
+See <a href="http://www.robthebloke.org/source/obj.html">http://www.robthebloke.org/source/obj.html</a> for more information and .OBJ capability.
+</body>
+</html>

@@ -1,0 +1,22 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Triangle Lists</B></font></p></td>
+  </tr>
+</table>
+<P>
+To specify completely arbitrary geometries within ParticleVis it may be more convenient to simply generate a model using external means rather than employ the built-in primitive types.  The &lt;file&gt; tag in the XML specification provides this functionality.  The &lt;file&gt; tag specifies a file that is parsed in a very straightforward manner: lists of triangles are read in and placed in a GL_TRIANGLES block.  The format of the triangle list file is simply a series of floating point values separated by whitespace.  The general organization takes the form:
+</P>
+<pre>
+	x1 y1 z1     n.x1 n.y1 n.z1
+	x2 y2 z2     n.x2 n.y2 n.z2
+	x3 y3 z3     n.x3 n.y3 n.z3
+	...
+	...
+	...
+</pre>
+<P> Each block of 18 values is interpreted as three vertices and their corresponding normals.  Each block becomes an independent triangle that is passed to the renderer.  Any number of triangles should be able to be processed.  It should be noted that the resulting triangles are rendered as one-sided in certain configurations (ie with transprency enabled).  The front face of a triangle is determined by its winding in window coordinates.  Triangle vertices that follow a counterclockwise path represent a front face, and vertices that follow a clockwise path are back facing.</P>
+</BODY>
+</HTML>

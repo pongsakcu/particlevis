@@ -1,0 +1,49 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Command Line Options</B></font></p></td>
+  </tr>
+</table>
+<P>It is possible to pass ParticleVis command-line options to modify its startup parameters, and also invoke background-rendering functionality.</P>
+<P>
+<DL>
+<DT>-f filename</DT>
+<DD>Specify an input state file name that is loaded on startup.</DD>
+<DT>-bf filename</DT>
+<DD>Specify input state file name for a background rendering job.</DD>
+<DT>-d filename</DT>
+<DD>Specify XML particle descriptor file to be loaded on startup.</DD>
+<DT>-tex filename</DT>
+<DD>Specify a bitmap to load for textures on startup.</DD>
+<DT>-nolights</DT>
+<DD>Disable lighting (on by default) at startup.</DD>
+<DT>-o filename</DT>
+<DD>Specify output filename for image dumps.</DD>
+<DT>-x n</DT>
+<DD>Specify width of render-window in pixels.</DD>
+<DT>-y n</DT>
+<DD>Specify height of render-window in pixels.</DD>
+<DT>-maxframes n</DT>
+<DD>Specify max number of frames to render in background mode.</DD>
+<DT>-pbuffer</DT>
+<DD>Use pbuffers to render in background mode, allowing hardware acceleration.  This option is highly recommended if your graphics card supports it.</DD>
+<DT>-noascii</DT>
+<DD>Disable dump of ASCII data when saving frames.</DD>
+<DT>-cam xyz xyz</DT>
+<DD>Force camera to point from 1st xyz (camera position) to 2nd xyz (lookat point).</DD>
+<DT>-cone xyz xyz a d</DT>
+<DD>Render a translucent cone pointing from xyz to xyz, angle = a, intersecting with a  cylinder of radius = d.</DD>
+<DT>-color n</DT>
+<DD>Specify false-color coloring scheme using: 1 = translational velocity, 2 = angular velocity.</DD>
+<DT>-vector n</DT>
+<DD>Switch on vectors of type: 1 = translational, 2 = angular, 3 = normals. You may specify -vector multiple times to switch on different vectors.</DD>
+<DT>-stereo</DT>
+<DD>Enable stereo output for video cards that support it.  This is currently an experimental feature.</DD>
+<DT>-?</DT>
+<DD>Display a help dialog for these command line options.</DD>
+</P>
+<P>Whenever background rendering is enabled (with -bf) the application will attempt to load and render with all specified options in a background task.  No user input beyond the initial command is necessary.</P>
+</BODY>
+</HTML>
