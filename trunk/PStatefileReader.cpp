@@ -11,7 +11,7 @@
 #include <string>
 #include <algorithm>
 #include <math.h>
-#include "tnt.h"
+#include "TNT/tnt.h"
 #include "quad.h"
 
 extern char map_filename[256];
