@@ -1,7 +1,7 @@
 #include "Particle.h"
 #include <math.h>
 #include <algorithm>
-#include "TNT.h"
+#include "TNT/TNT.h"
 #include "GeometryEngine.h"
 
 #define SQR(value) ((value)*(value))

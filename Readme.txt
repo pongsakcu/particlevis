@@ -1,13 +1,14 @@
-This is the CVS folder for ParticleVis.  By checking out all the source files here, you should have an up to date (but uncompiled) copy of PVis.
+This is the main trunk of ParticleVis.  By checking out all the source files here, you should have an up to date copy of PVis.
+
+LIBRARY ACKNOWLEDGEMENTS:
+  TNT: Template Numerical Toolkit
+  GLEW: GL Extension Wrangler
+  EXPAT: The Expat XML parser library
+  LIBPNG/ZLIB: Compression libraries for gzip reading/png writing
 
 TODO
 
 -Cullface disabled after inverted particles: disrupts transparency rendering
--Multiple file input?
--Color dialogs for marked particles etc.
--Implement renderers
-	-vectorsets?  probably separate.
-	-surface maps
 -Testing testing testing
 
 

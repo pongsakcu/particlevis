@@ -21,7 +21,7 @@ GeometryEngine
 #include <vector>
 #include "triple.h"
 #include "quad.h"
-#include <tnt.h>
+#include "TNT/tnt.h"
 
 using namespace std;
 

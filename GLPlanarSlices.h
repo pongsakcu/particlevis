@@ -12,7 +12,7 @@ GLPlanarSlices
 #pragma once
 #include <vector>
 #include "triple.h"
-#include "tnt.h"
+#include "TNT/tnt.h"
 #include "Camera.h"
 #include "RGBGradient.h"
 #include "ParticleStore.h"
