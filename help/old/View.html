@@ -1,0 +1,46 @@
+<HTML>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>View Menu Options</B></font></p></td>
+  </tr>
+</table>
+<IMG SRC=ViewMenu.gif>
+<P>The View Menu contains a host of options for rendering particle information.  Most of them are simple on/off toggles that affect the presence of various rendering features or pieces of information.</P>
+<DL>
+<DT><B>Set Geometry Quality</B></DT>
+<DD>Choosing one of the listed options will set all rendered particles to the specified level of geometric detail.  By setting lower levels of detail rendering performance can be gained at the expense of visual fidelity.  If the program seems to be running too slowly try selecting lower levels of detail.</DT>
+<DT><B>Set Color Scheme</B></DT>
+<DD>Allows you to code the color of each entire particle to some loaded information.  You may choose to use velocity, rotational velocity, or an externally loaded file of data to color the particles.  It is recommended that you disable texturing when the particles are being colored.  In the Scene Options dialog (Edit Menu) the maximum value of velocity/rotational velocity should be set such that the entire range of values is mapped into the color gradient.  You will also find in the Color Scheme submenu an option to Clear Color Maps.  This command will clear any color-map data loaded from file or XML.</DD>
+<DT><B>Set Transparency</B></DT>
+<DD>Enabling this option will render some or all of the particles as partially transparent.  Only those particles which are marked via "Mark Particle" or are within the bounds specified under "Bounds Options" are drawn as solid.  By enabling this option and then marking or bounding particles it is possible to analyze a subset of the particles in detail while still visualizing the entire particle set.  It is also possible to keep certain particles transparent using an XML attribute (see the XML geometry section).  The rendering mode for transparency is determined by the submenu choice.  Additive blending will use a fast method to draw each transparent particle, but it can potentially saturate the display very quickly.  Z-sorted alpha blending adds a sorting step which incurs a performance hit, but the rendered particles are drawn in a much more robust manner.</DD>
+<DT><B>Use Point Sprites</B></DT>
+<DD>Enabling this option will render all the particles as 2D sprites (circles or squares) instead of 3D polygonal models.  Rendering performance using sprites is massively superior to fully articulated models.  This enables very large collections of particles to be rendered at an acceptable speed.  As sprites, though, the particles cannot be lit or textured, have no orientation or consistent radius, and are much more difficult to distinguish.</DD>
+<DT><B>Use Textures</B></DT>
+<DD>Turns on/off textures on particles.  Texturing generally has a minimal performance impact and can enhance presentation.  With a textured surface it is also generally easier to ascertain orientation.</DD>
+<DT><B>Use Lighting</B></DT>
+<DD>Lighting the particles comes at a performance cost, but it vastly improves the appearance of the particles in most situations.</DD>
+<DT><B>Use Specular Highlights</B></DT>
+<DD>This is a lighting option that calculates a specular highlight on all surfaces in the simulation.  You may find that this adds visual appeal to the particles, but it does incur a significant performance hit.</DD>
+<HR>
+<DT><B>Draw Axes</B></DT>
+<DD>When enabled this option draws a set of axes centered on the origin.  The axes are scaled to fit in the viewing window, and are labeled by coordinate.</DD>
+<DT><B>Draw Particles</B></DT>
+<DD>This option allows you to disable the rendering of the actual particle objects.  This is typically only useful when you are rendering some other information that you wish to emphasize, such as a set of vectors.</DD>
+<DT><B>Draw Normal Vectors</B></DT>
+<DD>When this option is enabled each particle is given a normal vector that corresponds to the up vector in the object coordinates of the individual particle.  This is useful to emphasize the orientation of particles where it is otherwise difficult to visualize.</DD>
+<DT><B>Draw Translational Velocity Vectors</B></DT>
+<DD>When this option is enabled velocity vectors for each particle are drawn.  These vectors are color-coded according to magnitude.  The length of the vector itself, as well as the mapping of magnitude to color, can be adjusted in the Scene Options dialog (Edit Menu).</DD>
+<DT><B>Draw Rotational Velocity Vectors</B></DT>
+<DD>When this option is enabled angular velocity vectors for each particle are drawn.  The vectors correspond to an axis of rotation and angular velocity about that axis.  These vectors are color-coded according to magnitude.  The length of the vector itself, as well as the mapping of magnitude to color, can be adjusted in the Scene Options dialog (Edit Menu).</DD>
+<HR>
+<DT><B>Full-screen Mode</B></DT>
+<DD>This command will size the rendering window such that it fills the entire screen.  This is quite useful for presentations.  Pressing "Escape" or choosing the option again will reset the screen to normal.  While in fullscreen mode you cannot see the menu bar, but you can still open it by using shortcut keys (i.e. Alt-V).</DD>
+<DT><B>Set Window to Size</B></DT>
+<DD>When outputting image files it is often useful to set the window size to a preset value.  By choosing one of the submenu sizes you can force the rendering window to a certain dimension.  Note that the rendering window will not normally be able to scale beyond the resolution of the monitor.  For higher resolution ouput try using the command-line interface.</DD>
+<DT><B>Show Control Dialog</B></DT>
+<DD>This command will show the control dialog if it has been closed or hidden.</DD>
+</DL>
+<BODY>
+</BODY>
+</HTML>

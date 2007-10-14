@@ -1,0 +1,14 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Marking and Bounding</B></font></p></td>
+  </tr>
+</table>
+<IMG SRC=bounds.gif>
+<P>It is often useful to be able to analyze the behavior of only a subset of the particles in a system.  To accomplish this in ParticleVis, there are two mechanisms for highlighting or attenuating the particles.</P><BR>
+<P><B>Marked Particles</B><BR>To select a particle or series of particles by hand that you wish to track, select the "Mark Particle" command from either the Edit menu or the control dialog (or by pressing 'p').  You can then click directly on the particle you wish to mark.  Marked particles are colored red and their path over time is drawn as a green streamline.  You can mark as many particles as you wish.  When "Draw Transparent Particles" is enabled only the marked particles are drawn as solid, allowing you to view their path even when they would be obscured.</P><BR>
+<P><B>Bounding Particles</B><BR>If you wish to view a "slice" of the particle system, you can mark off particles by setting bounds in world coordinates.  The Bounds Options dialog is under the Edit menu, and allows you to specify minimum and maximum coordinates for X, Y, and Z.  When the bound test is enabled only those particle which fall inside the X, Y, or Z test will be drawn.  In this way you can cut into a specified region of the system.  If you enable "Draw Transparent Particles" with bound testing enabled, then all particles outside the bounds will be drawn as transparent, and only those particles which are marked or within the bounds will be drawn.</P>
+</BODY>
+</HTML>

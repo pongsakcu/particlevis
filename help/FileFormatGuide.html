@@ -1,0 +1,937 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ParticleVis File Formats</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="FileFormatGuide.tex"> 
+<meta name="date" content="2007-10-11 19:45:00"> 
+<link rel="stylesheet" type="text/css" href="FileFormatGuide.css"> 
+</head><body 
+>
+   <div class="maketitle">
+
+
+
+<h2 class="titleHead">ParticleVis File Formats</h2>
+<div class="author" ><span 
+class="cmr-12x-x-120">Vincent Hoon</span></div>
+<br />
+<div class="date" ></div>
+   </div>
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Contents</h3>
+   <div class="tableofcontents">
+   <span class="sectionToc" >1 <a 
+href="#x1-20001" id="QQ2-1-2">State File</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >1.1 <a 
+href="#x1-30001.1" id="QQ2-1-4">Binary State File</a></span>
+<br />   <span class="sectionToc" >2 <a 
+href="#x1-40002" id="QQ2-1-6">Vector File</a></span>
+<br />   <span class="sectionToc" >3 <a 
+href="#x1-50003" id="QQ2-1-8">Color Map File</a></span>
+<br />   <span class="sectionToc" >4 <a 
+href="#x1-60004" id="QQ2-1-10">Surface Map File</a></span>
+<br />   <span class="sectionToc" >5 <a 
+href="#x1-70005" id="QQ2-1-13">Volume File</a></span>
+<br />   <span class="sectionToc" >6 <a 
+href="#x1-80006" id="QQ2-1-16">Miscellaneous File Formats</a></span>
+   </div>
+<a 
+ id="x1-1000doc"></a>
+<!--l. 3--><p class="indent" >   This document describes the structure and syntax of various file types used by
+ParticleVis. Each file type represents a specific class of data, and some file types
+may be dependent on others for context. The file format of XML geometry
+descriptors is not described here, but it is covered in detail an accompanying
+document.
+
+<!--l. 5--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-20001"></a>State File</h3>
+<!--l. 6--><p class="noindent" >The particle state file is the primary source of data for ParticleVis. Within this
+file all fundamental information from the particle simulation is present. The state
+file enumerates position, orientation, and velocities for each particle at each a
+series of timesteps. The file format is either ASCII plaintext or gzip-compressed
+ASCII plaintext.
+<!--l. 8--><p class="indent" >   Within the state file there are a number of blocks of numerical data
+corresponding to each frame of data to be loaded. Each block is a series of lines of
+floating point values separated by whitespace. The strings used to represent the
+floating point values obey common C syntax: a combination of a plus or minus
+sign, numerals, an optional decimal point, and an optional exponent (preceded by
+&#8220;e&#8221; or &#8220;E&#8221;). All whitespace, including tabs, spaces, and blank lines, is ignored. A
+token denotes a single block of characters that is delimited by whitespace. The
+basic unit of data is a single line, which is a set of tokens terminated by a
+newline.
+<!--l. 10--><p class="indent" >   The general layout of the state file is illustrated in Figure <a 
+href="#x1-20011">1<!--tex4ht:ref: statefile-layout --></a>. Each line of state
+contains 13 floating point tokens, unless Euler angles are used (in which case there
+are only 12). Statements in brackets are comments.
+<!--l. 12--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-20011"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"><col 
+id="TBL-2-3"><col 
+id="TBL-2-4"><col 
+id="TBL-2-5"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-1-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">0</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
+class="td11"><span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">3</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-3"  
+class="td11"><span 
+class="cmmi-12">dx dy dz</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-4"  
+class="td11"><span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-5"  
+class="td11">[for particle 0]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-2"  
+class="td11"><span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">3</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-3"  
+class="td11"><span 
+class="cmmi-12">dx dy dz</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-4"  
+class="td11"><span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-5"  
+class="td11">[for particle 1]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-2"  
+class="td11"><span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">3</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-3"  
+class="td11"><span 
+class="cmmi-12">dx dy dz</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-4"  
+class="td11"><span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-5"  
+class="td11">[for particle 2]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-1"  
+class="td11">...    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-3"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-4"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-5-5"  
+class="td11">            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-1"  
+class="td11">...    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-3"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-4"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-6-5"  
+class="td11">            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-2"  
+class="td11"><span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">3</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-3"  
+class="td11"><span 
+class="cmmi-12">dx dy dz</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-4"  
+class="td11"><span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-7-5"  
+class="td11">[last particle] </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-1"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-3"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-4"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-8-5"  
+class="td11">            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-9-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-9-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">1</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-10-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-10-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-11-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-11-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;"></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-12-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-12-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">2</span></sub> </div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-13-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-13-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-14-"><td colspan="5" style="white-space:nowrap; text-align:left;" id="TBL-2-14-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;"></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-2-15-1"  
+class="td11">    </td></tr></table>                                                         </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;1: </td><td  
+class="content">The general layout of the state file. Each block corresponds to a
+single frame of state data.</td></tr></table><!--tex4ht:label?: x1-20011 -->
+
+<!--l. 34--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 36--><p class="indent" >   Each frame of the simulation is labeled by a timestamp <span 
+class="cmmi-12">t</span>, followed
+by a sequence of lines that correspond implicitly to the particles of the
+simulation. Each of these lines contains the position of the particle (<span 
+class="cmmi-12">x y z</span>), a
+quaternion describing the orientation of the particle (<span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-12">q</span><sub><span 
+class="cmr-8">3</span></sub>), the
+translational velocity vector (<span 
+class="cmmi-12">dx dy dz</span>), and the angular velocity vector
+(<span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span>).
+<!--l. 38--><p class="indent" >   The position and translational velocity are both given in world coordinates.
+The angular velocity vector is given in the local coordinates of the particle. The
+quaternion is used to orient the particle, and encodes a rotation that transforms
+the local object coordinates into world coordinates. At load time, each line of 13
+tokens is parsed into floating point values and stored in an internal data structure
+for use in visualization.
+<!--l. 40--><p class="indent" >   The state file may also employ Euler angles for orientation information,
+instead of quaternions. In this case the particle orientation is represented by 3
+Euler angles, given in radians, that establish the local object axes (a series of axial
+rotations in order X, Y, Z). When using Euler angles, each line of state contains
+only 12 tokens.
+   <div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"><col 
+id="TBL-3-2"><col 
+id="TBL-3-3"><col 
+id="TBL-3-4"><col 
+id="TBL-3-5"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-1"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-2"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-3"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-4"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-5"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-2"  
+class="td11"><span 
+class="cmmi-12">&#x03B7; &#x03BE; &#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-3"  
+class="td11"><span 
+class="cmmi-12">dx dy dz</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-4"  
+class="td11"><span 
+class="cmmi-12">d&#x03B7; d&#x03BE; d&#x03BB;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-5"  
+class="td11">[for each particle]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-1"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-2"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-3"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-4"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-5"  
+class="td11">              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-3-4-1"  
+class="td11">    </td> </tr></table>
+</div>
+<!--l. 48--><p class="indent" >   Based on the number of tokens per line, ParticleVis will choose the
+appropriate (Euler or quaternion) parser automatically.
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-30001.1"></a>Binary State File</h4>
+<!--l. 52--><p class="noindent" >Since conversions between decimal statefiles in ASCII format and binary floating
+point are expensive, a native binary format that holds state information
+directly in binary floating point form is available. This format uses single
+precision IEEE floating point values, and compared to ASCII statefiles is
+much more efficient in terms of precision (relative to file size) and loading
+speed.
+<!--l. 56--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-30012"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"><col 
+id="TBL-4-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-1"  
+class="td11"><span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">0</span></sub>                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-1-2"  
+class="td11">[4-byte timestamp]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-1"  
+class="td11"><span 
+class="cmmi-12">position</span>[]            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-2-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-1"  
+class="td11"><span 
+class="cmmi-12">orientation</span>[]       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-3-2"  
+class="td11">[for 4*4n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-4-1"  
+class="td11"><span 
+class="cmmi-12">trans</span>_<span 
+class="cmmi-12">velocity</span>[]   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-4-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-5-1"  
+class="td11"><span 
+class="cmmi-12">angular</span>_<span 
+class="cmmi-12">velocity</span>[]</td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-5-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-6-1"  
+class="td11">               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-6-2"  
+class="td11">                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-7-1"  
+class="td11"><span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">1</span></sub>                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-7-2"  
+class="td11">[4-byte timestamp]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-8-1"  
+class="td11"><span 
+class="cmmi-12">position</span>[]            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-8-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-9-1"  
+class="td11"><span 
+class="cmmi-12">orientation</span>[]       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-9-2"  
+class="td11">[for 4*4n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-10-1"  
+class="td11"><span 
+class="cmmi-12">trans</span>_<span 
+class="cmmi-12">velocity</span>[]   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-10-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-11-1"  
+class="td11"><span 
+class="cmmi-12">angular</span>_<span 
+class="cmmi-12">velocity</span>[]</td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-11-2"  
+class="td11">[for 4*3n bytes]    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-12-1"  
+class="td11">               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-12-2"  
+class="td11">                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-13-1"  
+class="td11">...                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-4-13-2"  
+class="td11">                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-4-14-1"  
+class="td11">               </td></tr></table>                                              </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;2: </td><td  
+class="content">The general layout of the binary state file. Each block corresponds
+to a single frame of state data.</td></tr></table><!--tex4ht:label?: x1-30012 -->
+
+<!--l. 77--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 79--><p class="indent" >   Each binary state file begins with a 4-byte header whose value is &#8220;DEM&#8221; and
+a single trailing space (if interpreted as ASCII), followed by a 4-byte unsigned
+integer that indicates the particle count. After these 8 bytes, a series of
+4-byte (single precision) floating point values comprise the remainder of the
+file. These values are issued one after another, packed together without
+delimiters.
+<!--l. 84--><p class="indent" >   The layout of the binary state file is similar to the ASCII state file: each frame
+block contains a floating point timestamp and a set of particle states for that
+frame. Unlike the ASCII state file, the state information in each block is organized
+into contiguous arrays, so that all positions, orientations, and velocities, are given
+in four large blocks, one after another. Quaternions are always used for
+specifying orientation. Each array contains either three (position, velocities) or
+four (quaternions) floating point values for every particle. Including the
+timestamp, each block will therefore contain 4 + 52<span 
+class="cmmi-12">n </span>bytes, where <span 
+class="cmmi-12">n </span>is the
+particle count. Any number of frames present in the binary file will be
+sequentially read in by ParticleVis. The layout of the file is outlined in figure
+<a 
+href="#x1-30012">2<!--tex4ht:ref: binary-layout --></a>.
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-40002"></a>Vector File</h3>
+<!--l. 94--><p class="noindent" >The vector file contains a set of frames that each describe a field of scattered
+vectors. The layout of frames in a vector file is similar to the layout in a state file.
+Unlike the state file, however, the length of each block is variable, and each line
+describes a single three-dimensional vector at a point (6 floating point values per
+line). Figure <a 
+href="#x1-40013">3<!--tex4ht:ref: vector-layout --></a> portrays the layout of the vector file: each block can have an
+arbitrary number of sampled vectors.
+<!--l. 96--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-40013"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1"><col 
+id="TBL-5-2"><col 
+id="TBL-5-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-1-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">0</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-2"  
+class="td11"><span 
+class="cmmi-12">dx dy dz </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-3"  
+class="td11">[for vector 0]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-2"  
+class="td11"><span 
+class="cmmi-12">dx dy dz </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-3"  
+class="td11">[for vector 1]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-2"  
+class="td11"><span 
+class="cmmi-12">dx dy dz </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-3"  
+class="td11">[for vector 2]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-1"  
+class="td11">...    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-3"  
+class="td11">           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-1"  
+class="td11">...    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-3"  
+class="td11">           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-1"  
+class="td11"><span 
+class="cmmi-12">x y z</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-2"  
+class="td11"><span 
+class="cmmi-12">dx dy dz </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-3"  
+class="td11">[last vector ]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-1"  
+class="td11">    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-2"  
+class="td11">        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-3"  
+class="td11">           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-9-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-9-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">1</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-10-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-10-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-11-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-11-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;"></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-12-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-12-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">2</span></sub> </div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-13-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-13-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-14-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-5-14-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;"></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-5-15-1"  
+class="td11">    </td></tr></table>                                                         </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;3: </td><td  
+class="content">The general layout of the vector file. Each block can have a variable
+length of vectors at arbitrary points in world space.</td></tr></table><!--tex4ht:label?: x1-40013 -->
+
+<!--l. 118--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 120--><p class="indent" >   Each line in the vector file is interpreted as a point, <span 
+class="cmmi-12">x y z</span>, and a
+three-dimensional vector relative to that point, <span 
+class="cmmi-12">dx dy dz </span>. The point is considered
+to be the sampling point, and the vector quantity is attached to that point in
+world space. Once loaded, the rendered lengths of the glyphs that represent the
+vector field can be adjusted, and colors can be mapped to the magnitude of the
+vectors.
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Color Map File</h3>
+<!--l. 124--><p class="noindent" >The color map file format allows the specification of a color for each particle at
+each frame in a loaded state file. This color is given in red, green, and blue
+intensities. The color map is composed entirely of integer values: each line assigns
+a color to a single particle at a particular frame. The line format contains 5
+integers, for particle ID, frame ID, and RGB color. The first three lines of a color
+map follow.
+   <div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-6-1g"><col 
+id="TBL-6-1"><col 
+id="TBL-6-2"><col 
+id="TBL-6-3"><col 
+id="TBL-6-4"><col 
+id="TBL-6-5"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-2"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-3"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-4"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-5"  
+class="td11">  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-2"  
+class="td11"><span 
+class="cmmi-12">frame</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-3"  
+class="td11"><span 
+class="cmmi-12">r</span><sub><span 
+class="cmr-8">0</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-4"  
+class="td11"><span 
+class="cmmi-12">g</span><sub><span 
+class="cmr-8">0</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-5"  
+class="td11"><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">0</span></sub></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-2"  
+class="td11"><span 
+class="cmmi-12">frame</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-3"  
+class="td11"><span 
+class="cmmi-12">r</span><sub><span 
+class="cmr-8">1</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-4"  
+class="td11"><span 
+class="cmmi-12">g</span><sub><span 
+class="cmr-8">1</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-5"  
+class="td11"><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-2"  
+class="td11"><span 
+class="cmmi-12">frame</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-3"  
+class="td11"><span 
+class="cmmi-12">r</span><sub><span 
+class="cmr-8">2</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-4"  
+class="td11"><span 
+class="cmmi-12">g</span><sub><span 
+class="cmr-8">2</span></sub></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-5"  
+class="td11"><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">2</span></sub></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-1"  
+class="td11">...        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-2"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-3"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-4"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-5"  
+class="td11">  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-2"  
+class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-3"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-4"  
+class="td11">  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-5"  
+class="td11">  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-7-1"  
+class="td11">       </td> </tr></table>
+</div>
+<!--l. 135--><p class="indent" >   Any number of these lines can be specified in a color map file. Each line gives
+a particle <span 
+class="cmmi-12">p</span>, and a frame <span 
+class="cmmi-12">f</span>, which are both integer IDs that correspond to the
+implicit order of particles and frames in the loaded state file, starting at zero. Any
+arrangement of the particle IDs is valid. The <span 
+class="cmmi-12">r g b </span>values are integers ranging from
+zero to 255 that describe the color to be mapped. Zero corresponds to
+no intensity and 255 corresponds to maximum intensity for that color
+channel.
+<!--l. 137--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-50014"></a>
+
+
+<!--l. 139--><p class="noindent" ><img 
+src="pics/timeline.png" alt="PIC"  
+>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;4: </td><td  
+class="content">Persistent color mapping on a particle means that each specified
+color will persist until another is specified, as shown in this timeline.</td></tr></table><!--tex4ht:label?: x1-50014 -->
+
+<!--l. 142--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 144--><p class="indent" >   At load time the user is able to select a &#8220;persistent&#8221; or &#8220;non-persistent&#8221;
+loading style for color maps. Persistent mapping will retain the mapped color of
+the particle until it is changed again, as is shown in Figure <a 
+href="#x1-50014">4<!--tex4ht:ref: map-timeline --></a>. When persistence is
+enabled the specifed frame numbers must be nondecreasing. Non-persistent
+mapping will only specify a color for the given frame, and the particle will revert
+to a white color in the next frame.
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-60004"></a>Surface Map File</h3>
+<!--l. 149--><p class="noindent" >The surface map file format enables a scalar value to be specified across the
+surface of each loaded spherical particle. Surface maps are loaded through an
+XML descriptor with an embedded filename and map resolution (a resolution of
+ten by ten is standard).
+<!--l. 151--><p class="indent" >   Each particle has a set of mapping locations, totalling the square of the
+resolution, distinguished by an ID number. These &#8220;panel numbers&#8221; and
+their corresponding map points are obtained by a simple iteration over
+spherical coordinates, as demonstrated by the pseduocode in Figure <a 
+href="#x1-60015">5<!--tex4ht:ref: panel-nums --></a>. In this
+iteration, theta varies faster than phi, and each point defines the upper left
+corner of a spherical &#8220;panel&#8221; region. The actual mapping point is in the
+center of each of these panel regions (note the offset values in Figure
+<a 
+href="#x1-60015">5<!--tex4ht:ref: panel-nums --></a>).
+<!--l. 153--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-60015"></a>
+
+<table 
+class="verbatim"><tr class="verbatim"><td 
+class="verbatim"><div class="verbatim">
+res&#x00A0;=&#x00A0;10;
+&#x00A0;<br />offset_phi&#x00A0;=&#x00A0;(pi/res)&#x00A0;/&#x00A0;2.0
+&#x00A0;<br />offset_theta&#x00A0;=&#x00A0;(2*pi/res)&#x00A0;/&#x00A0;2.0
+&#x00A0;<br />
+&#x00A0;<br />ID&#x00A0;=&#x00A0;0;
+&#x00A0;<br />for&#x00A0;(phi&#x00A0;=&#x00A0;0&#x00A0;to&#x00A0;pi,&#x00A0;step&#x00A0;(pi/res))
+&#x00A0;<br />&#x00A0;&#x00A0;for&#x00A0;(theta&#x00A0;=&#x00A0;0&#x00A0;to&#x00A0;2*pi,&#x00A0;step&#x00A0;(2*pi/res))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;=&#x00A0;sin(phi+offset_phi)&#x00A0;*&#x00A0;cos(theta+offset_theta);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;=&#x00A0;cos(phi+offset_phi);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;=&#x00A0;sin(phi+offset_phi)&#x00A0;*&#x00A0;sin(theta+offset_theta);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;index&#x00A0;=&#x00A0;ID++;
+&#x00A0;<br />&#x00A0;&#x00A0;end&#x00A0;for
+&#x00A0;<br />end&#x00A0;for
+</div>
+</td></tr></table>
+<!--l. 169--><p class="nopar" >
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;5: </td><td  
+class="content">Pseudocode demonstrating the iteration over spherical coordinates
+and panel ordering for surface maps.</td></tr></table><!--tex4ht:label?: x1-60015 -->
+
+<!--l. 172--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 174--><p class="indent" >   The surface map file is laid out in blocks, just like the state file and vector file.
+Each block contains a list of lines, each of which defines a single mapping point
+on some particle and panel. The first two entries are integer IDs: the
+particle ID, corresponding to the ordering of particles in the loaded state
+file, and the panel ID, corresponding to the spherical order discussed
+previously. Both IDs start from zero. The panel value is a floating point
+number that will be attached that panel. Figure <a 
+href="#x1-60026">6<!--tex4ht:ref: surface-layout --></a> demonstrates the file
+layout.
+<!--l. 176--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-60026"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-7-1g"><col 
+id="TBL-7-1"><col 
+id="TBL-7-2"><col 
+id="TBL-7-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-7-1-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-7-1-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">0</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-2"  
+class="td11"><span 
+class="cmmi-12">panel</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-3"  
+class="td11"><span 
+class="cmmi-12">value</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-2"  
+class="td11"><span 
+class="cmmi-12">panel</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-3"  
+class="td11"><span 
+class="cmmi-12">value</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-4-1"  
+class="td11"><span 
+class="cmmi-12">particle</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-4-2"  
+class="td11"><span 
+class="cmmi-12">panel</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-4-3"  
+class="td11"><span 
+class="cmmi-12">value</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-1"  
+class="td11">...        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-2"  
+class="td11">     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-3"  
+class="td11">     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-6-2"  
+class="td11">     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-6-3"  
+class="td11">     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-7-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-7-7-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">1</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-8-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-7-8-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-9-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-9-2"  
+class="td11">     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-9-3"  
+class="td11">     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-10-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-7-10-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">* <span 
+class="cmmi-12">t</span><sub><span 
+class="cmr-8">2</span></sub></div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-11-"><td colspan="3" style="white-space:nowrap; text-align:left;" id="TBL-7-11-1"  
+class="td11"><div class="multicolumn"  style="white-space:nowrap; text-align:left;">[...frameblock...]</div>
+</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-12-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-12-2"  
+class="td11">     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-7-12-3"  
+class="td11">     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-13-1"  
+class="td11">       </td></tr></table>                                                       </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;6: </td><td  
+class="content">The layout of a surface map file.</td></tr></table><!--tex4ht:label?: x1-60026 -->
+
+<!--l. 196--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 198--><p class="indent" >   The panel values are persistent: once values are loaded onto a particle and
+panel, they will remain until another is specified. The mapping from surface
+values to coloring can be adjusted once the surface map has been loaded. A
+horizontally oriented texture map is used to provide the gradient of color for the
+coloring process.
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-70005"></a>Volume File</h3>
+<!--l. 202--><p class="noindent" >The volume file format enables a &#8220;raw&#8221; binary file of volumetric data to be
+loaded. The format of this file is modeled after Paul Bourke&#8217;s VOL file format.
+A plaintext header describing the file is given in the first five lines of
+the file, and the remaining data is interpreted as an array of scalars (in
+one of many formats) that describes an intensity value across a block of
+space.
+<!--l. 204--><p class="indent" >   The header, shown in Figure <a 
+href="#x1-70017">7<!--tex4ht:ref: vol-header --></a>, is human readable, and can be written in by
+hand to adapt many common raw volume file formats for use with ParticleVis.
+The header contains a comment line, an integer grid length for each dimension, a
+cell size in world coordinates, the position (in world coordinates) of the lower
+corner of the volume grid, and a datatype flag. The datatype flag describes how to
+interpret the actual bytes in the grid, and the byte ordering of these values.
+Supported values are &#8220;16,&#8221; which indicates a 2-byte unsigned integer, &#8220;32,&#8221;
+which indicates a 4-byte unsigned integer, and &#8220;-32,&#8221; which indicates
+a 4-byte floating point value. The second token on the datatype flag is
+either &#8220;0&#8221; for big endian (e.g., Motorola processors), and &#8220;1&#8221; for little
+endian (e.g., Intel processors). An example header is shown in Figure
+<a 
+href="#x1-70028">8<!--tex4ht:ref: example-header --></a>.
+<!--l. 206--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-70017"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-8-1g"><col 
+id="TBL-8-1"><col 
+id="TBL-8-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-8-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-1-1"  
+class="td11">Comment line.   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-8-1-2"  
+class="td11">[This line can contain comments on the file.]                  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-2-1"  
+class="td11"><span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">x</span></sub>  <span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">y</span></sub>  <span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">z</span></sub>              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-8-2-2"  
+class="td11">[The integer length of the volume grid in each dimension.]</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-3-1"  
+class="td11"><span 
+class="cmmi-12">s</span><sub><span 
+class="cmmi-8">x</span></sub>  <span 
+class="cmmi-12">s</span><sub><span 
+class="cmmi-8">y</span></sub>  <span 
+class="cmmi-12">s</span><sub><span 
+class="cmmi-8">z</span></sub>             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-8-3-2"  
+class="td11">[Specifies the size of each grid cell in each dimension.]      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-4-1"  
+class="td11"><span 
+class="cmmi-12">p</span><sub><span 
+class="cmmi-8">x</span></sub>  <span 
+class="cmmi-12">p</span><sub><span 
+class="cmmi-8">y</span></sub>  <span 
+class="cmmi-12">p</span><sub><span 
+class="cmmi-8">z</span></sub>            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-8-4-2"  
+class="td11">[The coordinates of the lower corner of the volume cube.] </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-5-1"  
+class="td11"><span 
+class="cmmi-12">datatype endian</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-8-5-2"  
+class="td11">[Type flag for individual grid values, and endian flag.]      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-8-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-8-6-1"  
+class="td11">              </td></tr></table>                                                  </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;7: </td><td  
+class="content">The five-line header to a volume file.</td></tr></table><!--tex4ht:label?: x1-70017 -->
+
+<!--l. 219--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 221--><p class="indent" >   <hr class="figure"><div class="figure" 
+><table class="figure"><tr class="figure"><td class="figure" 
+>
+
+<a 
+ id="x1-70028"></a>
+
+<div class="fbox"> <!--tex4ht:inline--><div class="tabular"><table class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-9-1g"><col 
+id="TBL-9-1"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-9-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-1-1"  
+class="td11">An example volume file.</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-2-1"  
+class="td11">200 200 100                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-3-1"  
+class="td11">0.005 0.005 0.01           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-4-1"  
+class="td11">0 0 0                         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-5-1"  
+class="td11">16 1                          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-9-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-9-6-1"  
+class="td11">                    </td></tr></table>                                         </div> </div>
+<br /> <table class="caption" 
+><tr style="vertical-align:baseline;" class="caption"><td class="id">Figure&#x00A0;8: </td><td  
+class="content">An example header to a volume file, specifying a 200 x 200 x 100
+cube with a side length of 1.0. The data type is 16-bit unsigned integers,
+little endian.</td></tr></table><!--tex4ht:label?: x1-70028 -->
+
+<!--l. 234--><p class="indent" >   </td></tr></table></div><hr class="endfigure">
+<!--l. 236--><p class="indent" >   The remainder of the file is a sequences of byte values of the type described in
+the header. The layout of bytes is that of an array that varies most quickly along
+the X dimension, then Y, and then Z. The total number of values read will equal
+<span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">x</span></sub> <span 
+class="cmsy-10x-x-120">&#x00D7;</span><span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">y</span></sub> <span 
+class="cmsy-10x-x-120">&#x00D7;</span><span 
+class="cmmi-12">l</span><sub><span 
+class="cmmi-8">z</span></sub>. Once the volume file is loaded, the size and shape of the cells and the
+grid location can be adjusted in ParticleVis. The mapping between the
+scalar values in the volumetric grid and color (and opacity) can also be
+defined.
+   <h3 class="sectionHead"><span class="titlemark">6   </span> <a 
+ id="x1-80006"></a>Miscellaneous File Formats</h3>
+<!--l. 240--><p class="noindent" >A handful of other file formats are also used by ParticleVis for both input and
+output. The &#8220;load texture map&#8221; command allows the loading a 24-bit bitmap file
+of arbitrary size for use in texture mapping. Any device independent bitmap with
+a color depth of 24 bits will suffice. The size of the bitmap is limited only by the
+available graphics memory. Texture filtering may be superior when the texture
+dimensions are a power of two.
+<!--l. 242--><p class="indent" >   Image output is provided through use of the PNG and AVI files. During image
+output a series of PNG (portable network graphics) files can be generated.
+Alternately, a Windows AVI (audio-video interleave) container file can be created
+and filled with outgoing frames. Selection of an appropriate codec for compressing
+the AVI file can be done from within ParticleVis.
+<!--l. 244--><p class="indent" >   Two other minor file types can be loaded by ParticleVis: graph files and
+gradient files. The &#8220;create graph from file&#8221; command allows a plaintext file
+containing X-Y points to be loaded into a subwindow. The first four lines of this
+file specify the axes labels and scales, and the remainder specfies a set of X-Y
+points. All tokens should be separated by whitespace or line breaks. The header
+values that are parsed are, in order, X axis label, Y axis label, minimum X value,
+minimum Y value, maximum X value, maximum Y value, X grid size, and Y grid
+size. After these values, a series of X-Y pairs are read in to create a line plot on
+the graph. Each new point corresponds to another frame of loaded state during
+playback.
+<!--l. 246--><p class="indent" >   RGB Gradient files are used to save and load gradient maps. A number of
+RGB knots can be specfied in these plaintext files. The first token read
+is interpreted as an integer that gives the number of knots in the file.
+Each knot value is composed of four tokens: an index (a real value from
+zero to one), and red, green, and blue intensities (also reals, from zero
+
+to one). Whitespace serves as a delimiter, and no newlines are present.
+Gradient files can be loaded from within the gradient editor dialog in
+ParticleVis.
+    
+</body></html> 
+
+
+

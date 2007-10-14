@@ -1,0 +1,47 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Scene Specifications Dialog</B></font></p></td>
+  </tr>
+</table>
+<IMG src=scene.gif>
+<P>The Scene Dialog contains all the numerical constants for configuring rendering of the scene.  There are several sections of parameters.</P><BR>
+<P><H3>Camera and View</H3>
+<IMG src=camera.gif>
+<DL>
+<DT><B>Projection Angle</B></DT>
+<DD>The Projection Angle specifies the angle of view that the camera sees when using perspective projection.  A narrower angle affords less distortion and larger particles, whereas a larger angle allows more of the scene to be viewed at once.</DD>
+<DT><B>Min and Max Z Distance</B></DT>
+<DD>The minimum and maximum Z values are the lower and upper limits of distance from the camera within the scene.  These must be set appropriately for each environment such that no particle is beyond the max Z (where it would be clipped) and an appropriately small minimum Z is used.  Setting very low values for the minimum Z will allow the camera to be extremely close to viewed particles without clipping, but it may negatively impact the precision of rendering overlapping objects.  Both values must be positions, and minimum Z must be greater than 0.</DD>
+<DT><B>Distance/Radius of Rotation</B></DT>
+<DD>This allows the user to manually enter the distance from the camera position to the target, equivalent to the radius of the camera's spherical rotation.  See the Camera Control section for more information on how the camera works.</DD>
+<DT><B>Override Camera Control</B></DT>
+<DD>By enabling the override, the user may numerically enter values for the camera position and target.  This allows the user to reproduce exact viewpoints.  When the override is not enabled, the current position and look-at target are always placed into the dialog.  You may also use the Positioner dialog to set force-camera coordinates graphically.</DD>
+</DL>
+</P><HR>
+<P><H3>Vector Parameters</H3>
+<DL>
+<DT><B>Maximum Velocity/Translational Velocity</B></DT>
+<DD>When vectors are drawn they are color-coded by their magnitude.  These two parameters allow you to change the upper value of the mapping, such that the maximum value the user enters is the very end of the color gradient.  The optimal setting will vary between datasets, and should be set such that the highest range of information is mapped into the color gradient.  These parameters also affect Color Scheme mappings in an identical manner.</DD>
+<DT><B>Vector Length</B></DT>
+<DD>Setting this value will scale the length of all vectors.  When this value equals 1.0 the vectors are rendered with length exactly proportional to their values in the raw data.  Typically this is either too large or too small, so this scaling factor should be set such that the vector length is appropriate to the data.</DD>
+<DT><B>Marked Path Length</B></DT>
+<DD>This parameter scales the length of the paths that are drawn behind marked particles.  The value of this field corresponds to the number of frames the path is drawn over.  If the path length is too long or too short you may scale it by increasing or decreasing this value.</DD>
+</DL>
+</P><HR>
+<P><H3>Colors and Lighting</H3>
+<DL>
+<DT><B>Alpha Transparency</B></DT>
+<DD>When "Draw Transparent Particles" is enabled this value determines the percentage transparency that the particles are rendered at.  1.0 is completely opaque and 0 is completely transparent.  The cone drawn by the Positioner dialog also uses this value for transparency.</DD>
+<DT><B>Pick Background Color</B></DT>
+<DD>Selecting this command brings up a color-picker dialog that sets the background color of the entire scene.</DD>
+<DT><B>Lighting Settings</B></DT>
+<DD>ParticleVis uses two directional lights by default.  In this section you may disable or enable the two lights by checking them, and you can adjust the brightness and direction of the lights by editing their vectors.  The light direction is a vector from the specified point to the origin.  The brightness determines the intensity of the light source, from 0 to 1-- higher intensity values can be entered but may appear abnormal.  See also the Positioner dialog to adjust the light direction graphically.</DD>
+</DL>
+</P><HR>
+<P><H3>Miscellaneous Options</H3>
+Here you can toggle on or off the display of the timestamp in the lower left corner and the display of the frames per second rendered in the lower right.  The FPS counter will be updated once every three seconds.</P>
+</BODY>
+</HTML>

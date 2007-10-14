@@ -1,0 +1,39 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Particle State File</B></font></p></td>
+  </tr>
+</table>
+<P>The particle state data file is the primary source of information for ParticleVis.  Within this file all fundamental information from the particle simulation is present.  The state file enumerates position, orientation, and velocities for each particle at each frame to be visualized.  The file format is plain text ASCII.</P>
+<P>Within the state file there are a number of blocks of data corresponding to each timepoint to be loaded.  A header section preceding this information can contain any data desired (except for the * delimiter) but is not processed by the simulation. The data itself is composed of blocks of frames with state information for each particle.</P>
+<P>The general format of the file is sequences of integer and floating point values seperated by whitespace.  For the purposes of formatting, all whitespace (tabs, spaces, blank lines) is ignored, and only functions as a delimiter for numerical values.  A token denotes a single block of characters that is delimited by whitespace.  Newline characters terminate a list of tokens.  As such, the basic unit of data is a line, which is one or more tokens terminated by a newline.</P>
+<DL>
+	<DT><B>State Information</B></DT>
+	<DD>
+		* time<BR>
+		x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; eta &nbsp;&nbsp; xi &nbsp;&nbsp; lambda &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz &nbsp;&nbsp; d.eta &nbsp;&nbsp; d.xi &nbsp;&nbsp; d.lambda (for each particle...)<BR>
+		...<BR>
+		...<BR>
+		x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; eta &nbsp;&nbsp; xi &nbsp;&nbsp; lambda &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz &nbsp;&nbsp; d.eta &nbsp;&nbsp; d.xi &nbsp;&nbsp; d.lambda (last particle)<BR><BR>
+
+		* time + 1<BR>
+		...<BR><BR>
+		
+		* time + 2<BR>
+		...<BR><BR>
+		...<BR><BR>
+		...<BR><BR>
+
+		The bulk of the particle state file is the state information itself.  Each frame of the simulation is labeled by a timestamp, followed by a sequence of lines that correspond implicitly to the particles of the simulation.  Each of these lines contains the position of the particle (x y z), the orientation of the particle (eta xi lamdba), the translational velocity vector (dx dy dz), and the angular velocity vector (d.eta d.xi d.lambda).  The position and translational velocity are both given in world coordinates.  The particle orientation denotes 3 euler angles that establish the local object axes.  The angular velocity is given in these local coordinates.  Each line of 12 tokens is parsed into floating point values and stored in an internal data structure for visualization.</DD>
+</DL>
+<P>The state file may also employ quaternions instead of Euler angles.  In this case each line looks like:</P>
+<DL>
+	<DD>
+	x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; q0 &nbsp;&nbsp; q1 &nbsp;&nbsp; q2 &nbsp;&nbsp; q3 &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz &nbsp;&nbsp; d.eta &nbsp;&nbsp; d.xi &nbsp;&nbsp; d.lambda (for each particle)
+	</DD>
+</DL>
+<P>Since this format includes more tokens per line than the Euler style, PVis will choose the appropriate parser automatically.</P>
+</BODY>
+</HTML>

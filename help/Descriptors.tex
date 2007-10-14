@@ -1,0 +1,509 @@
+%
+%  XML section
+%
+%  Vincent Hoon, 2007
+%
+
+\newcommand{\xml}[1]{\begin{tt}#1\end{tt}}
+%\newcommand{\xml}[1]{\textbf{#1}}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand{\labelitemiii}{$\bullet$}
+
+%
+\label{XML-Section}
+
+Representing the state of a discrete particle simulation at a point in time is straightforward:
+the centerpoint of each particle is specified in space.  The orientation of the particle may
+also be specified in the form of a quaternion or a set of Euler angles.
+In ParticleVis, each frame of data is represented as a list of these states, and a state file is used for storage of the frames.
+
+This format is an effictive way to store simulation data, but the problem of
+specifying the actual geometric shape of each particle remains.  In order to maximize the
+flexibility of the visualization system, a human-readable markup file format was devised
+to describe the geometry of a set of particles associated with a state file.
+The Extensible Markup Language (XML) provided the basis for this format.  While the XML
+data is not rigorously validated, an existing XML parser can be used to easily process
+the input file.  The vocabulary is designed to be simple and easily modified or generated
+by end-users.
+
+\section{Basic Format}
+
+The format, referred to as an XML geometry descriptor, is designed to match
+the implicit ordering of particles in a statefile.
+The markup format of XML is well-suited to a hierarchy of particle attributes.
+Each piece of information in the XML file is delimited by a set of markup tags of the form
+\xml{<tag> ... </tag>}.
+The top-level tag of the vocabulary is the \xml{<particleset>}, and individual particle attributes are 
+represented by \xml{<particle>} tags. 
+
+\begin{itemize}
+	\item \xml{particleset}
+		\begin{itemize}
+			\item \xml{particle}
+			\begin{itemize}		
+				\item \xml{sphere}
+				\item \xml{cylinder}
+				\item \xml{cone}
+				\item \xml{cap}
+				\item \xml{plate}
+				\item \xml{line}
+				\item \xml{file}
+				\item \xml{objfile}
+				\item \xml{flipsurface}
+			\end{itemize}
+			\item \xml{static}
+			\begin{itemize}
+					\item (same as particle)
+			\end{itemize}
+			\item \xml{scene}
+		\end{itemize}
+\end{itemize}
+
+The hierarchy of tags is structured as shown above.  The the top level tag contains
+a number of particle tags that enclose a series of geometric primitives.  Each particle has various
+attributes that can be passed in to modify its appearance. 
+Each primitive can be transformed in the local object space of the particle.  At load time, the XML parser
+will process each particle, generate OpenGL commands to render the specified geometry, and assign the representation
+to the appropriate particle.  The position and orientation of the loaded particle data is used as the origin and orientation of the specified geometry.
+
+The mapping from XML to the statefile is as shown in Table \ref{tab:xmllayout}.  The correspondence from particle tags
+to statefile ID numbers is either one-to-one or one-to-many.  Each new \xml{<particle>} is mapped onto a loaded statefile in-order.  The last particle description in the file automatically applies to all remaining statefile ID's.  Thus, if only one \xml{<particle>} tag is present, it applies to the entire set of particles.  The ``count'' attribute may also create a one-to-many map to particle IDs.
+
+\begin{table}[htbp]
+\centering
+\caption[The general layout of an XML geometry descriptor]{The general layout of an XML geometry descriptor and its relation to the statefile.}
+        \label{tab:xmllayout}
+        \begin{tabular}{l c l}
+        \hline
+        \xml{<particleset>}     &  & * time \\
+        \xml{ <particle></particle>}& $\rightarrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 0) \\
+        \xml{ <particle></particle>}& $\rightarrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 1)\\
+        \xml{ <particle></particle>}& $\rightarrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 2)\\
+                   & $\searrow$ & $\vdots$ \\
+                   & $ $ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (last particle)\\
+        \xml{</particleset>}    &  &  \\
+        \hline
+        \end{tabular}
+\end{table}
+
+\subsection{Particle Attributes}
+
+A set of optional attributes may be inserted into the enclosing braces of any particle tag.
+This insertion takes the form \xml{<particle [tag1="data"] [tag2="data"] ... >} for an arbitrary number of attribute tags.  The attributes and their effects are listed in Table \ref{tab:att}.  For example, an XML particle tag might take the form:
+
+\xml{<particle notransparent="false" inverted="true" r="0" g="1" b="0">}
+
+This tag specifies a particle that is green, always opaque, and ``inverted'' for a cutaway view on its interior.  Note that the attributes are enclosed in double quotes (single quotes are also permissible).  The data-types of integer and float map real numbers to parameters.  The boolean type maps the strings ``true'' or ``false'' to a logical state.
+
+Of particular note is the ``count'' attribute, which affects the mapping of descriptors to statefile ID's.  Thus a particle tag of the form \xml{<particle count="5000">} will map the same specified geometry to the next 5000 lines of statefile input.  Table \ref{tab:xmlmapping} portrays an example use of the count attribute.  Since particle states are commonly grouped by type, this attribute allows the compact specification of several particle categories that correspond to the input file.
+
+\begin{table}[htbp]
+        \caption[Particle attributes and their effects]{Particle attributes and their effects.}
+        \label{tab:att}
+\begin{center}
+	\begin{footnotesize}
+        \begin{tabular}{l | c | l}
+        Attribute ID & Type & Effects \\
+        \hline\hline
+        count & integer & Changes the multiplicity of the particle.\\
+        quality & integer & Increases the quality (triangle count) of particle geometry.\\
+        notransparent & boolean & When true, prevents particle from being drawn transparently.\\
+        inverted & boolean & Causes the particle to be rendered ``inside-out,'' with reversed faces.\\
+        textures & boolean & If false, prevents textures from being enabled on this particle.\\ 
+        r & float & Overrides particle color, red channel, range [0, 1].\\        
+        g & float & Overrides particle color, green channel,  range [0, 1].\\
+        b & float & Overrides particle color, blue channel, range [0, 1].\\
+        \hline
+        \end{tabular}
+	\end{footnotesize}
+\end{center}
+\end{table}
+
+\begin{table}[htb]
+        \caption[Mapping particle tags to state using the ``count'' attribute]{Mapping particle tags to state using the ``count'' attribute.}
+        \label{tab:xmlmapping}
+\begin{center}
+        \begin{tabular}{l c l}
+        \hline
+        \xml{<particleset>}     &  & * time \\
+        \xml{ <particle count="3"></particle>}& $\rightarrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 0) \\
+           & $\searrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 1)\\
+           &            & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 2)\\
+        \multicolumn{1}{r}{\xml{ <particle></particle>}} & $\rightarrow$ & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (particle 3)\\                   
+           & $\searrow$ & $\vdots$ \\
+           &            & $x \; y \; z \; \; q_0 \; q_1 \; q_2 \; q_3$ ... (last particle)\\
+        \xml{</particleset>}    &  &  \\
+        \hline
+        \end{tabular}
+\end{center}
+\end{table}
+
+\section{Primitives}
+
+A number of geometric primitives are available for use in specifying particle shape.
+The objects are spheres, spherical caps, cylinders, cones, points, lines, and quadrilaterals (plates).
+A set of these primitives is issued within each particle tag to describe its appearance.  Each primitive
+has a variety of parameters that determine its size and shape, and each primitive may be transformed with regard to position and orientation.  Two secondary primitive tags, \xml{file} and \xml{objfile}, allow file input to be used for particle geometry.
+
+\subsection{Transformation Tags}
+
+Within any primitive, it is possible to specify an affine transformation involving a rotation followed by a translation.  This operation will transform the unit geometry into the object space of the particle.
+The tags that perform this transformation are \xml{<position>} and \xml{<orientation>}.  The position tag accepts an x/y/z input, in the form
+``\xml{<position> <x>x-pos</x> <y>y-pos</y> <z>z-pos</z></position>}.''
+The orientation tag accepts input in two forms: that of Euler angles, using eta/xi/lamdba, or as a quaternion, specified in the form $q_0 \; q_1 \; q_2 \; q_3$.
+The format with Euler angles uses the \xml{<eta>}, \xml{<xi>}, and \xml{<lambda>} tags.  The Euler angles are given in radians, and denote a series of rotations: first around the X axis, then around Y, and then around Z.
+The quaternion orientation format uses the \xml{<q0>}, \xml{<q1>}, \xml{<q2>}, and \xml{<q3>} tags.  Both orientation types are portrayed in Table \ref{tab:orientation}.
+By applying these transformations to the primitive tags, an arbitrary arrangement of shapes may be specified.
+
+\begin{table}
+\caption[Orientation tags using Euler angles and quaternions]{Orientation tags using Euler angles and quaternions.}
+\label{tab:orientation}
+\begin{verbatim}
+<particle>
+   ...
+   <orientation>
+      <eta>eta-angle</eta>
+      <xi>xi-angle</xi>
+      <lamdba>lambda-angle</lambda>
+   </orientation>
+</particle>
+
+<particle>
+   ...
+   <orientation>
+      <q0>w-val</q0>
+      <q1>x-val</q1>
+      <q2>y-val</q2>
+      <q3>z-val</q3>
+   </orientation>
+<particle>
+\end{verbatim}
+\end{table}
+
+\subsection{Primitive Types}
+
+\subsubsection{Sphere}
+\begin{figure}
+ \begin{center}
+   \includegraphics[width=3in]{pics/spheres.png}
+ \end{center}            
+        \hspace*{2in}   \xml{<sphere>}\\
+        \hspace*{2.2in} \xml{<radius>1.0</radius>}\\
+  \hspace*{2in}   \xml{</sphere>}      
+        \caption[An untextured and textured sphere primitive]{An untextured and textured sphere primitive and example descriptor.}
+        \label{fig:SpherePrimitive}     
+\end{figure}
+The simplest primitive is the sphere, shown in Figure \ref{fig:SpherePrimitive}.  It has only a single parameter: \xml{<radius>}.
+By using the \xml{<position>} tag the sphere can be centered anywhere in the object space.
+Rotation tags have no effect on the generated sphere geometry.  If a radius of 0 is specified, a point will be rendered instead of a polygonal sphere.  A `pure' sphere primitive (alone within a \xml{<particle>}) is able to be rendered using programmable shaders, which provide enhancements to performance and visual fidelity.
+
+
+\subsubsection{Cap}
+The cap, shown in Figure \ref{fig:CapPrimitive}, specifies a parameterized spherical cap that lies somewhere between a flat disc and a hemisphere.
+The parameters for the cap, which lies on the XY plane, are the \xml{<radius>} and \xml{<height>}.
+The \xml{<radius>} is the radius of the outer edge of the cap, and the \xml{<height>} is the `thickness' of the cap,
+or the distance from the origin to the highest point on the spherical cap, $(0,0,height)$.  When \xml{<height>}=0 the geometry becomes a disc.  When \xml{<height>} is positive the cap becomes a truncated sphere, where the radius of curvature of the cap is $\frac{radius^2 + height^2}{2 \cdot height}$.  When $height > radius$ no valid spherical cap exists and the cap geometry is undefined.
+\begin{figure}
+\begin{center}
+   \includegraphics[width=3in]{pics/cap.png} \\
+   \includegraphics[width=5in]{pics/cap-measure.png} \\
+ \end{center}                
+        \hspace*{2in}   \xml{<cap>}\\
+        \hspace*{2.2in} \xml{<radius>1.0</radius>}\\
+        \hspace*{2.2in} \xml{<height>0.2</height>}\\    
+  \hspace*{2in}   \xml{</cap>}      
+  
+        \caption[A textured cap primitive]{A textured cap primitive and example descriptor.}
+        \label{fig:CapPrimitive}        
+\end{figure}
+
+\subsubsection{Cylinder}
+A cylinder tag specifies a cylindrical surface, shown in Figure \ref{fig:CylPrimitive}.  The tag has two parameters: \xml{<radius>} and \xml{<length>}.
+The radius corresponds to the radius of the cylinder base, which lies on the object space XY plane.
+The length corresponds to the height of the cylinder in the Z direction.
+This cylinder is centered on the origin, extending out equally along the Z axis in both directions.
+\begin{figure}
+ \begin{center}
+   \includegraphics[width=3.5in]{pics/cylinder.png} \\
+   \includegraphics[width=3in]{pics/cyl-measure.png} \\
+ \end{center}           
+ \noindent
+        \hspace*{2in}   \xml{<cylinder>}\\
+        \hspace*{2.2in} \xml{<radius>1.0</radius>}\\
+        \hspace*{2.2in} \xml{<length>2.0</length>}\\
+  \hspace*{2in}   \xml{</cylinder>}
+    
+        \caption[A cylinder primitive]{A cylinder primitive and example descriptor.}
+        \label{fig:CylPrimitive}
+\end{figure}
+
+
+\subsubsection{Cone}
+
+A cone takes three parameters: a \xml{<small\_radius>}, a \xml{<large\_radius>}, and a \xml{<half\_angle>}.
+A cone tag can represent a regular cone, a truncated cone, but not a cylinder (the two radii must not be equal).  If small\_radius = 0, the apex of the cone always lies directly on the object space origin, and the axis extends along the position Z direction.  A cone with a small radius of zero is shown in Figure \ref{fig:ConeIso}.
+The two radius tags correspond to the radii of the smaller (small\_radius) and larger (large\_radius) conical bases, which both lie on the XY plane.
+The half\_angle tag specifies the angle formed between the top edge of the cone and the Z axis.
+A regular cone that tapers to a point is generated when the \xml{<small\_radius>} is specified as 0.
+A truncated cone is generated whenever \xml{<small\_radius>} is greater than 0.
+In both cases the half angle of the cone combined with the large radius always determines the `height' of the cone.
+If the half angle and large radius remain the same, the effect of increasing the small radius will be to truncate the upper portion of the cone, shown in Figure \ref{fig:ConeSmall}.
+The axial position of the cone's larger base is thus $(0, 0, \frac{large\_radius}{\tan (half\_angle)})$
+and the axial position of the smaller base is $(0, 0, \frac{small\_radius}{\tan (half\_angle)})$.
+
+\begin{figure}[htb]
+ \begin{center}
+   \includegraphics[width=4in]{pics/coneiso.png}
+ \end{center}           
+        \hspace*{2in}   \xml{<cone>}\\
+        \hspace*{2.2in} \xml{<small\_radius>0.0</small\_radius>}\\
+        \hspace*{2.2in} \xml{<large\_radius>0.1</large\_radius>}\\
+        \hspace*{2.2in} \xml{<half\_angle>0.5</half\_angle>}\\
+  \hspace*{2in}   \xml{</cone>}    
+        \caption[A cone primitive]{A cone primitive.}
+        \label{fig:ConeIso}
+\end{figure}
+
+\begin{figure}[htb]
+ \begin{center}
+   \includegraphics[width=4in]{pics/conesmall.png}
+ \end{center}
+        \caption[The effect of increasing the small radius on cones]{The effect of increasing the small radius for three otherwise identical cones.}
+        \label{fig:ConeSmall}
+\end{figure}
+
+\subsubsection{Plate}
+A plate is used to specify a quadrilateral.  The four parameters are the four corners of the quad, and each point is given directly in object space.  The form is \xml{<cornerN> <x>x-val</x> <y>y-val</y> <z>z-val</z> </cornerN>}, for $N = 1, 2, 3, 4$.  While this plate will generally be planar, it is actually rendered as a pair of triangles: one from the loop $1-2-4$, and one from $2-3-4$.  A series of plates could theoretically be combined to form any arbitrary geometry, but the file and object-file tags are better suited for this purpose.
+
+\subsubsection{Line}
+A line adds a single line segment to the particle geometry.  This line is specified much like the plate object, as the parameters are \xml{<corner1>} and \xml{<corner2>}, and the XYZ positions are directly used to form the line's endpoints in object space.
+
+\subsubsection{File}
+In order to specify an arbitrary geometry, an ASCII text file specifying triangles (in object space) can be loaded into the geometry engine using the \xml{<file>} tag.  The file specifies a set of points and surface normals, every three of which compose a single triangle.  The normals are specified at each vertex for the purpose of lighting calculations.  The \xml{<filename>} parameter within the primitive descriptor is a string that points to the triangle file (relative to the path of the XML file itself).  As per usual, transformation tags may be used to displace the geometry.
+
+%\begin{figure}
+% \centering
+% \includegraphics[width=1.25in]{pics/xml/plate/plate.png}   
+% \caption{A pyramid composed of several lines, points (spheres at radius 0) and a plate.}
+% \label{fig:PlateLines}        
+%\end{floatingfigure}
+
+\begin{figure}[htb]
+ \begin{center} 
+ \begin{tabular}[t]{cc} 
+  \begin{tabular}[b]{ccc ccc}
+        $x_0$ & $y_0$ & $z_0$ & $nx_0$ & $ny_0$ & $nz_0$ \\
+        $x_1$ & $y_1$ & $z_1$ & $nx_1$ & $ny_1$ & $nz_1$  \\
+        $x_2$ & $y_2$ & $z_2$ & $nx_2$ & $ny_2$ & $nz_2$ 
+        \end{tabular} & \includegraphics[width=1.5in]{pics/tris.png}
+ \end{tabular} 
+ \end{center} 
+ \caption[Three lines of a triangle file]{Three lines of a triangle file.  This block would form a single triangle with the specified vertices and surface normals.}
+ \label{fig:TriangleFile}
+\end{figure}
+
+The format of triangle files, shown in Figure \ref{fig:TriangleFile}, is extremely simple.  The intent of this design is to allow an external script to easily generate triangle assemblies: little regard is given to space efficiency.  Each line of the file is composed of six decimal values separated by whitespace.  The first three values specify the location of the vertex in object space, and the next three specify the surface normal at that point.  Every three lines of the ASCII triangle file is parsed into a single triangle in object space.  The set of triangles may be disjoint, and there is no way to specify texture coordinates or colors.  The functionality of the file primitive is largely superseceded by the OBJFile primitive, and use of OBJ files is recommended.
+
+\subsubsection{OBJFile}
+
+Like the \xml{<file>} tag, the \xml{<objfile>} geometry descriptor inserts an arbitrary collection of triangles into
+the particle representation.  The format for the objfile, however, is a subset of the Wavefront OBJ file format, which is commonly supported by CAD packages.  The OBJ file parser is only capable of recognizing the simplest OBJ files, which contains only vertices, normals, and texture coordinates.
+
+\begin{figure}[!htb]
+\begin{center}
+\begin{tt}
+\begin{tabular}{l c}
+\begin{tabular}[b]{l}
+v  1.0  1.0  1.0 \\
+v -1.0 -1.0  1.0 \\
+v -1.0  1.0 -1.0 \\
+v  1.0 -1.0 -1.0 \\
+vn 1.0 1.0 1.0 \\
+vn 0.0 0.0 1.0 \\
+vn 0.0 1.0 0.0 \\
+vn 1.0 0.0 0.0 \\
+f 1/1 4/4 2/2 \\
+f 1/1 2/2 3/3 \\
+f 1/1 3/3 4/4 \\
+f 2/2 3/3 4/4 
+\end{tabular} & \includegraphics[height=2.5in]{pics/tetra.png} \\
+\end{tabular}
+\end{tt}
+\end{center}
+\caption[An object file that specifies a tetrahedron with surface normals]{An object file that specifies a tetrahedron with surface normals.}
+\label{fig:obj}
+\end{figure}
+
+The OBJ files are ASCII text, and contain lists of vertices, normals, texture coordinates, and faces.  The basic structure of an OBJ file is a series of tagged lines with a single piece of data on each line.  The delimiter on each line is whitespace.  The recognized tags in ParticleVis are `v' for vertex (an xyz value), `vn' for vertex (surface) normal (also xyz), `vt' for texture coordinates (two dimensional), and `f' for face.  The lists of vertices, normals, and texture coordinates are parsed in-order and are given an implicit ID corresponding to their order in the file, starting at 1.  The format of the `f' face tags then specifies lists of (three) indices: a vertex, an optional normal, and an optional texture coordinate.  These indices are delimited by forward slashes (/), as 1, 2, or 3 indices may be issued per point.  Faces should be specified in clockwise order.  See Figure \ref{fig:obj} for a simple example file.
+
+\section{Static Geometry}
+While the geometry tags can be placed within \xml{<particle>} tags in any combination to render particle themselves, often it is useful to have a set of geometry that is unmoving and is not tied to any particle state.  
+The \xml{<static>} tag is directly analogous to the \xml{<particle>} tag, except that it specifies a set of geometry that simply remains at rest within the environment.  The \xml{<static>} tag is enclosed by the outer \xml{<particleset>}, and only one will be is parsed for each set.  Any combination of geometric primitives in any position can be placed inside it.  Since it sits at the origin without rotation, the object space of the static geometry is the same as the world space.
+
+
+\section{Scene Settings}
+Since an XML descriptor generally corresponds to a single dataset or single class of data, it is often desirable to encode scene or viewpoint parameters into the descriptor.  The \xml{<scene>} tag, enclosed in the \xml{<particleset>}, allows particle and camera parameters to be passed into the rendering engine.
+
+A single \xml{<scene>} tag may contain a block of scene descriptors.  These tags describe camera position and projection, marked particles, axes options, and vector scaling parameters.
+\begin{description}
+        \item[Camera Tags]  The tag ``\xml{<camera> ... </camera>}'' can enclose two subtags that allow the setting of camera axial direction and projection type.
+                \begin{description}
+                        \item[Camera Direction] By passing ``\xml{<direction> X|Y|Z </direction>}'' the camera will be set to view down a particular axis (X, Y, or Z) when the XML descriptor is loaded.
+                        \item[Camera Projection] Passing ``\xml{<ortho> true|false </ortho>}'' will place the camera in an orthographic projection (if `true' is passed) or the regular perspective projection (if `false' is passed).
+                \end{description}
+        \item[Marking] If a ``\xml{<mark> ID </mark>}'' tag is specified, the particle whose ID matches that passed ID will be highlighted in the scene.  Any number of \xml{<mark>} tags can be passed in, and large sets of particles can be flagged.
+        \item[Axes] The ``\xml{<axes> true | false </axes>}'' tag will enable or disable the coordinate axes upon descriptor load.
+\end{description}
+
+\section{Miscellaneous Features}
+Many features in the XML language have evolved in response to specific abilities found in the ParticleVis renderer, and as such they are difficult to classify.  Two are worth noting: the ability to control the surface orientation of ``inverted'' primitives, and the ability to specify per-particle scalar data in the form of ``surface maps.''
+
+The tag \xml{<flipsurface>} sits at the same level as geometric primitives: it can be included within a `particle' or `static' tag.  By enclosing one or more primitive inside a \xml{<flipsurface> ... </flipsurface>} pair, the ``inverted'' particle attribute may be reversed.  This tag only applies when ``inverted'' has been set to true.  By using this pair of tags to enclose primitives, a solid can be constructed from a combination of front and back faces.  For example, if a cutway shell were desired, but interior objects such as spheres or cones were to be represented normally, the interior primitives could be enclosed in a \xml{<flipsurface>}  (with inversion enabled) and the desired effect could be achieved.
+
+Finally, the \xml{<particleset>} tag supports two attributes as well.  In order to specify a set that has surface-map data applied to it, a tag of the form \xml{<particleset map\_filename="mapname" map\_resolution="resolution">} is passed.  This instructs the parser to load surface map data from the file ``mapname'' of $resolution \times resolution$ points across the surface of each spherical particle.
+
+\section{Examples}
+In this section a series of examples that demonstrate the features of the XML geometry language are presented.
+
+\subsection{Spheres}
+\begin{figure}
+\begin{verbatim}
+<particleset>
+   <particle>
+      <sphere>
+         <radius>1.0</radius>
+      </sphere>
+   </particle>
+</particleset>
+\end{verbatim}
+ \caption[A minimal descriptor for spheres of radius 1]{A minimal descriptor for spheres of radius 1.}
+ \label{fig:spheres}
+\end{figure}
+The first example in Figure \ref{fig:spheres} represents a minimal descriptor that assigns all loaded particles a sphere of radius 1.
+No attributes or additional geometry is specified.
+
+\begin{figure}
+\begin{verbatim}
+<particleset>
+   <particle>
+      <sphere count="1000" r="0" g="0" b="1" textures="false">
+         <radius>1.0</radius>
+      </sphere>
+      <sphere count="1000" r="0" g="1" b="0" quality="2">
+         <radius>1.0</radius>
+      </sphere>
+   </particle>
+</particleset>
+\end{verbatim}
+ \caption[A descriptor utilizing attributes to set color and geometry quality]{A descriptor utilizing attributes to set color and geometry quality.}
+ \label{fig:sphereatt}
+\end{figure}
+In Figure \ref{fig:sphereatt} a set of 1000 red spheres and 1000 green spheres are specified, all with radius 1.
+The red spheres have texturing disabled, and the green spheres are two geometry quality levels higher than normal.
+The specification of \xml{count="1000"} in the green sphere set is actually unnecessary, as the spheres will map to all remaining particles ($N - 1000$).
+
+\subsection{Composite Geometries}
+
+A more complex example that involves cylinders, caps, and geometric transformations is shown in Figure \ref{fig:composite}.
+The product of this descriptor is a convex solid, a cylinder with capped ends (or a biconvex tablet).
+The \xml{<orientation>} tag and \xml{<position>} tags are used together to flip the second cap ($\pi$ radians about the X axis) and position it directly on the cylinder's end.  The resulting geometry is shown in Figure \ref{fig:Biconvex}.
+
+In Figure \ref{fig:drum} a cylindrical drum (first particle) and two baffles are defined.  The drum is inverted, so that when rendered the back faces will be shown instead of the front.  This effect results in a cutaway view that will allow the interior of the object to be shown.  The geometry quality has also been elevated.  The cylindrical drum solid is formed from a cylinder and two truncated cones.  The two baffles are simply plates with appropriate sizes.  Setting `textures' to false means that the plates will not be textured (when texturing is enabled in the renderer).
+
+\begin{figure}
+\begin{small}
+\begin{verbatim}
+<particleset>
+   <particle>
+      <cylinder>
+         <radius>0.2</radius>
+         <length>0.1</length>
+         <position><x>0</x><y>0</y><z>0</z></position>
+      </cylinder>
+      <cap>
+         <radius>0.2</radius>
+         <height>0.05</height>
+         <position><x>0</x><y>0</y><z>0.05</z></position>
+      </cap>
+      <cap>
+         <radius>0.2</radius>
+         <height>0.05</height>
+         <position> <x>0</x> <y>0</y> <z>-0.05</z> </position>
+         <orientation>
+            <eta>3.141593</eta>
+            <xi>0</xi>
+            <lambda>0</lambda>
+         </orientation>
+      </cap>
+   </particle>
+</particleset>
+\end{verbatim}
+\end{small}
+ \caption[A composite solid descriptor]{A composite solid descriptor.  The result of this description is a biconvex tablet.}
+ \label{fig:composite}
+\end{figure}
+
+\begin{figure}[htbp]%[r]{1.5in}
+ \centering
+ \includegraphics[width=4.0in]{pics/tablet.png}
+ \caption[The composite solid, a biconvex tablet]{The composite solid, a biconvex tablet.}
+ \label{fig:Biconvex}
+\end{figure}
+
+\begin{figure}
+\begin{scriptsize}
+\begin{verbatim}
+<particleset>
+   <particle inverted="true" quality="2">
+      <cylinder>
+         <radius>304.8e-3</radius>
+         <length>266.7e-3</length>
+      </cylinder>
+      <cone>
+         <small_radius>139.7e-3</small_radius>
+         <large_radius>304.8e-3</large_radius>
+         <half_angle>0.9948</half_angle>
+         <position>
+            <x>0</x>
+            <y>0</y>
+            <z>0.3313</z>
+         </position>
+         <orientation>
+            <xi>0</xi>
+            <eta>3.141593</eta>
+            <lambda>0</lambda>
+         </orientation>
+      </cone>
+      <cone>
+            <small_radius>139.7e-3</small_radius>
+            <large_radius>304.8e-3</large_radius>
+            <half_angle>0.9948</half_angle>
+            <position>
+               <x>0</x>
+               <y>0</y>
+               <z>-0.3313</z>
+            </position>
+      </cone>
+   </particle>
+   <particle count="2" textures="false">
+      <plate>
+         <corner1> <x>0</x> <y>0</y> <z>0</z> </corner1>
+         <corner2> <x>0.2667</x> <y>0</y><z>0</z> </corner2>
+         <corner3> <x>0.2667</x> <y>0.0762</y><z>0</z> </corner3>
+         <corner4> <x>0</x> <y>0.0762</y><z>0</z> </corner4>
+      </plate>
+   </particle>
+</particleset>
+\end{verbatim}
+\end{scriptsize}
+ \caption[The descriptor for a cylindrical drum with conical ends]{The descriptor for a cylindrical drum with conical ends.}
+ \label{fig:drum}
+\end{figure}
+
+\begin{figure}
+ \centering
+ \includegraphics[width=5in]{pics/drum.png}   
+ \caption[The resulting cylindrical drum geometry]{The resulting cylindrical drum geometry.}
+ \label{fig:drumpic}
+\end{figure}

@@ -1,0 +1,13 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Texture Maps</B></font></p></td>
+  </tr>
+</table>
+<P>ParticleVis can load device independent bitmaps (.bmp) files and use them as texture maps for particles.  The bitmap files are simply 24-bit windows bitmaps.</P>
+<IMG SRC=PVisTexture.png>
+<P>Generally, any sized image is acceptable, although dimensions that are powers of two will result in smoother filtering.  Most graphics hardware will also enforce a hardware limit on the maximum size of textures, for example 2048 x 2048.  Most objects that can be rendered by ParticleVis can be fully textured.  Certain objects are designed to map the top and bottom 25% of the image onto certain areas of geometry.  This texture map, for example, will result in a biconvex tablet shape that has striped caps with a blue band.</P>
+</BODY>
+</HTML>

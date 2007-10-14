@@ -1,0 +1,20 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Positioner Dialog</B></font></p></td>
+  </tr>
+</table>
+<IMG SRC=positioner.gif>
+<P>The Positioner dialog can be accessed from the Edit menu.  It allows users to manipulate the position of objects within the scene such as the light direction and forced camera viewpoint with graphical feedback.  There are currently three manipulation modes.</P>
+<BR>
+<P>When you are manipulating a point, drag with the left mouse button to shift the point in the X-Z plane, and drag with the right mouse button to shift in the Y direction.  Each point is drawn with a drop-line to Y=0 to allow for easier height perception.</P>
+<BR>
+<P><B>The Camera</B><BR>It can be difficult to enter in coordinates for the "force camera" mode in the Scene Dialog by hand.  By using the positioner you can see the camera and its field of view relative to the scene from an external vantage.  Clicking either the "Camera Position" or "Camera Target" modes will draw the current camera into the environment as a point and viewing vector.  The blue base point denotes the camera's location and the arrow points to the target point.  To change the targetted point, use the second mode, and to shift the base point, use the first.  If you check "Draw Cone" a transparent cone representing the field of view will also be rendered.  You may leave this option on perenially as a visual reference or effect.</P>
+<BR>
+<P><B>The Lights</B><BR>You may also position the direction of the two lights that illuminate the scene.  This can also be done by hand in the Scene Dialog.  The lighting in PVis is purely directional for performance reasons: the two lights cast perfectly parallel rays, as if they were an infinite distance away from the scene.  The points are represented as vectors pointing into the origin.  If you select one of the light options and drag it around, you should be able to see the lighting on your particles change.</P>
+<BR>
+<P>To revert to manipulating the main camera, simply select "Regular" mode on the dialog.</P>
+</BODY>
+</HTML>

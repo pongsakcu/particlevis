@@ -1,0 +1,38 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Surface Maps</B></font></p></td>
+  </tr>
+</table>
+<P>A surface map is a specialized file format that describes a numerical value across the surface of each particle every frame.  The particles themselves are always assumed to be spheres, and the resolution of the map is assumed to be a symmetric size.  The location of each surface point is determined by iterating across the sphere (in spherical coordinates) in a grid corresponding to the resolution of the surface map.
+</P>
+<IMG src=SurfaceMap.png>
+<P>A surface map is loaded by specifying a map_filename within the &lt;particleset&gt; tag of an XML geometry file.  You may also specify the map_resolution attribute.  An example:<BR>
+&lt;particleset map_filename="SZA.n4000.out" map_resolution="10"&gt;<BR>
+Once you have loaded the state file, loading the XML with the surface map specification will begin the parsing of the map file.</P>
+<P>The format of the surface data itself is similar to a particle state file.  It should be formatted in the following manner:<BR>
+<pre>
+* time
+particle_number     panel_number     panel_value
+particle_number     panel_number     panel_value
+particle_number     panel_number     panel_value
+...for each particle/panel
+...
+...
+* time+1
+particle_number     panel_number     panel_value
+.
+.
+.
+* time + 2
+.
+.
+.
+.
+</pre>
+This format can be used differentially; only the panels whose value changes need to be updated in subsequent frames.  The particle/panel values can be given in any order within the frame.  The panel_number corresponds to the ID of the panel, which is determined by numbering the grid of panel locations, ranging from the number 1 to resolution*resolution.  The numbering is from the smallest values of phi and theta to the largest, where phi varies more quickly.</P>
+<P>As each frame of this data has been parsed the visualized particle will switch to the dynamically generated surface-mapped sphere.  To properly visualize the surface map load in a gradient texture bitmap such as the included tinygradient.bmp.  Each point on the sphere generates a texture coordinate that corresponds to the magnitude of the panel_value at that point.  This value is normalized by the largest panel_value read in.  Experiment with different gradient texture files to achieve the best effect.  Note that a gradient texture varies its color in the horizontal direction.</P>
+</BODY>
+</HTML>

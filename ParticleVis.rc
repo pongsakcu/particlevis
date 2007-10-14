@@ -1,0 +1,1103 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\ParticleVis.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\ParticleVis.ico"
+IDI_BULB                ICON                    "res\\bulb.ico"
+IDI_CAM                 ICON                    "res\\cam.ico"
+IDI_TRICON              ICON                    "res\\icon1.ico"
+IDI_OPENICON            ICON                    "res\\open.ico"
+IDI_WRITEICON           ICON                    "res\\write.ico"
+IDI_MARKICON            ICON                    "res\\markicon.ico"
+IDI_TEXTICON            ICON                    "res\\texticon.ico"
+IDI_BGICON              ICON                    "res\\bgicon.ico"
+IDI_PATHICON            ICON                    "res\\pathicon.ico"
+IDI_ANGLEICON           ICON                    "res\\angleicon.ico"
+IDI_RADIUSICON          ICON                    "res\\radius.ico"
+IDI_ZFARICON            ICON                    "res\\zfar.ico"
+IDI_ZNEARICON           ICON                    "res\\znear.ico"
+IDI_LINEICON            ICON                    "res\\lineicon.ico"
+IDI_POINTICON           ICON                    "res\\pointicon.ico"
+IDI_SPLITICON           ICON                    "res\\spliticon.ico"
+IDI_GRIDICON            ICON                    "res\\gridicon.ico"
+IDI_GRAPHICON           ICON                    "res\\graphicon.ico"
+IDI_BOUNDICON           ICON                    "res\\boundicon.ico"
+IDI_TRANSICON           ICON                    "res\\transicon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open Datafile",              ID_FILE_LOADDATAFILE
+        MENUITEM "Open &Particle Descriptor",   ID_FILE_OPENPARTICLEDESCRIPTOR
+        MENUITEM "Open &Vector File",           ID_FILE_OPENVECTORFILE
+        MENUITEM SEPARATOR
+        MENUITEM "&Terminate All File Processes", ID_FILE_TERMINATEALLFILEPROCESSES
+        MENUITEM "Suspend Drawing &Processes",  ID_FILE_SUSPENDDRAWINGPROCESSES
+        MENUITEM SEPARATOR
+        MENUITEM "Load &Color Map",             ID_FILE_LOADCOLOR
+        MENUITEM "Load Non-Persistent Color Map", ID_FILE_LOADNON
+        MENUITEM "&Load Texture Map",           ID_FILE_LOADTEXTUREMAP
+        MENUITEM SEPARATOR
+        MENUITEM "&Generate Benchmark Frame",   ID_FILE_GENERATEBENCHMARKFRAME
+        MENUITEM "&Report current loaded data", ID_FILE_REPORTCURRENTDATA
+        MENUITEM "Set all to &Spheres",         ID_FILE_GENERATESPHEREDESCRIPTOR
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM SEPARATOR
+        MENUITEM "Last File...",                57616, INACTIVE
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Copy Frame to Clipboard\tCtrl+C", ID_EDIT_COPYFRAMEDATA
+        MENUITEM SEPARATOR
+        MENUITEM "&Mark Particle for Tracking\tp", ID_PARTICLES_TRACKPARTICLE
+        MENUITEM "Mark Particle to &Hide\th",   ID_EDIT_MARKPARTICLETOHIDE
+        MENUITEM "Mark Particle by &ID\ti",     ID_EDIT_MARKPARTICLEBYID
+        MENUITEM "&Follow Particle\tf",         ID_SETCAMERAPOSITION_TRACKPARTICLE
+        MENUITEM "&Visibility Selector",        ID_Menu_Visibility
+        MENUITEM "&Unmark All Marked Particles", 144
+        MENUITEM SEPARATOR
+        MENUITEM "View along &X-Axis\tF2",      ID_SETCAMERAPOSITION_X
+        MENUITEM "View along &Y-Axis\tF3",      ID_SETCAMERAPOSITION_Y
+        MENUITEM "View along &Z-Axis\tF4",      ID_SETCAMERAPOSITION_Z
+        MENUITEM SEPARATOR
+        MENUITEM "Toggle &Projection",          ID_SETCAMERAPOSITION_TOGGLEPROJECTION
+        MENUITEM "Position Camera/Lights",      ID_EDIT_POSITIONCAMERA
+        MENUITEM SEPARATOR
+        MENUITEM "&Bounding Options",           ID_PARTICLES_SETVIEWINGVOLUME
+        MENUITEM SEPARATOR
+        MENUITEM "&Image Saving Options",       ID_EDIT_IMAGESAVINGOPTIONS
+        MENUITEM "&Color Options",              ID_EDIT_INTERFACECOLOROPTIONS
+        MENUITEM "&Auto-Set Scene Options\ta",  ID_EDIT_AUTO
+        MENUITEM "Scene &Options",              ID_PARTICLES_SETVIEWINGOPTIONS
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "Set Geometry &Quality"
+        BEGIN
+            MENUITEM "&Low\t1",                     ID_SETQUALITY_LOW
+            MENUITEM "&Medium\t2",                  ID_SETQUALITY_MEDIU
+            MENUITEM "&High\t3",                    ID_SETQUALITY_HIGH
+            MENUITEM "&Very High\t4",               ID_SETQUALITY_HIGHEST
+            MENUITEM "&Ultra-high\t5",              ID_SETGEOMETRYQUALITY_ULTRA
+            MENUITEM SEPARATOR
+            MENUITEM "Use &Sphere Shader\t6",       ID_SETGEOMETRYQUALITY_USESPHERESHADER
+            POPUP "Sphere Shader Type"
+            BEGIN
+                MENUITEM "Phong Shading",               ID_SPHERESHADERTYPE_PHONGSHADING
+                MENUITEM "Phong + Outlines",            ID_SPHERESHADERTYPE_PHONG
+                MENUITEM "Basic Shading",               ID_SPHERESHADERTYPE_BASICSHADING
+                MENUITEM "Cartoon",                     ID_SPHERESHADERTYPE_CARTOON
+                MENUITEM "Radial Sprite",               ID_SPHERESHADERTYPE_EXPERIMENTAL
+                MENUITEM "Perspective-Correct",         ID_SPHERESHADERTYPE_PERSPECTIVE
+                MENUITEM SEPARATOR
+                MENUITEM "Velocity Glyph",              ID_SPHERESHADERTYPE_VELOCITYGLYPH
+                MENUITEM "Velocity Glyph (Scaled)",     ID_SPHERESHADERTYPE_VELOCITYGLYPH2
+                MENUITEM "Velocity Motion Blur",        ID_SPHERESHADERTYPE_MOTIONBLUR
+            END
+        END
+        POPUP "Set &Color Scheme"
+        BEGIN
+            MENUITEM "&Default White",              ID_SETCOLORSCHEME_DEFAULTWHITE
+            MENUITEM "Map &Velocity to Gradient",   ID_SETCOLORSCHEME_MAPTOVELOCITY
+            MENUITEM "Map &Rotational Velocity to Gradient", ID_SETCOLORSCHEME_MAPTOANGULARVELOCITY
+            MENUITEM "Map &Position to Gradient",   ID_SETCOLORSCHEME_MAPPOSITIONTOPOS
+            MENUITEM SEPARATOR
+            MENUITEM "Edit Current &Gradient",      ID_SETCOLORSCHEME_EDITCURRENTGRADIENT
+            MENUITEM "Set Gradient to Spectrum",    ID_CURRENTGRADIENT_SETTOSPECTRUM
+            MENUITEM "Set Gradient to Greyscale",   ID_CURRENTGRADIENT_SETTOGREYSCALE
+            MENUITEM "Set Gradient to Thermal",     ID_CURRENTGRADIENT_SETTOTHERMAL
+            MENUITEM SEPARATOR
+            MENUITEM "&Clear Color Maps",           ID_SETCOLORSCHEME_CLEARCOLORMAPS
+        END
+        POPUP "Set &Transparency"
+        BEGIN
+            MENUITEM "&No Transparency",            ID_SETTRANSPARENCY_NOTRANSPARENCY
+            MENUITEM "&Additive Alpha Blending",    ID_SETTRANSPARENCY_ADDITIVEALPHABLENDING
+            MENUITEM "&Z-Sorted Alpha Blending",    ID_SETTRANSPARENCY_Z
+        END
+        MENUITEM "Set Surface Map Properties",  ID_VIEW_SETSURFACEMAPPROPERTIES
+        MENUITEM SEPARATOR
+        MENUITEM "Use P&oints",                 145
+        MENUITEM "Use Te&xtures\tt",            ID_VIEW_USETEXTURES
+        MENUITEM "Use &Lighting\tl",            ID_VIEW_USELIGHTING
+        MENUITEM "Use &Specular Highlights",    ID_VIEW_USESPECULARHIGHLIGHTS
+        MENUITEM SEPARATOR
+        MENUITEM "Draw &Axes",                  ID_VIEW_AXES
+        MENUITEM "Draw &Particles\tCtrl-P",     ID_VIEW_DRAWPARTICLES
+        MENUITEM SEPARATOR
+        MENUITEM "Draw &Normal Vectors",        ID_VIEW_DRAWNORMALVECTORS
+        MENUITEM "Draw Translational &Velocity Vectors\tCtrl-V", ID_VIEW_TOGGLEVELOCITYVECTORS
+        MENUITEM "Draw &Rotational Velocity Vectors\tCtrl-R", ID_VIEW_DRAWROTATIONALVELOCITYVECTORS
+        MENUITEM SEPARATOR
+        MENUITEM "Vector Length Res&izer",      ID_VIEW_RESIZEVECTORS
+        MENUITEM SEPARATOR
+        POPUP "Set Window to Size"
+        BEGIN
+            MENUITEM "320 x 240",                   ID_SETWINDOWTOSIZE_320X240
+            MENUITEM "512 x 512",                   ID_SETWINDOWTOSIZE_512X512
+            MENUITEM "640 x 480",                   ID_SETWINDOWSIZE_640X480
+            MENUITEM "800 x 600",                   ID_SETWINDOWSIZE_800X600
+            MENUITEM "1024 x 768",                  ID_SETWINDOWSIZE_1024X768
+            MENUITEM "1280 x 960",                  ID_SETWINDOWSIZE_1280X960
+            MENUITEM SEPARATOR
+            MENUITEM "Set to Arbitary Size",        ID_SETWINDOWTOSIZE_SETTOARBITARYSIZE
+        END
+        MENUITEM "Render Frame Offscreen",      ID_VIEW_RENDERTOOFFSCREENBUFFER
+        MENUITEM "&Full-screen Mode",           ID_VIEW_FULL
+        MENUITEM SEPARATOR
+        MENUITEM "&Show Control Dialog",        ID_VIEW_SHOWCONTROLDIALOG
+    END
+    POPUP "&Analysis"
+    BEGIN
+        MENUITEM "&Graph Properties",           ID_GRAPH_GRAPHPROPERTIES
+        MENUITEM "Create &Particle Analysis Graph", ID_REFERENCE_CREATEPARTICLE
+        MENUITEM "&Create Graph from File",     ID_GRAPH_LOADDATAINTOGRAPH
+        MENUITEM SEPARATOR
+        MENUITEM "Create &Trans. Velocity Legend", ID_GRAPH_CREATEVELOCITYLEGEND
+        MENUITEM "Create &Angular Velocity Legend", ID_GRAPH_CREATEANGULARVELOCITYLEGEND
+        MENUITEM SEPARATOR
+        MENUITEM "Apply Color Grid",            ID_ANALYSIS_MARKOUTGRID
+        MENUITEM "Apply Color Split",           ID_ANALYSIS_APPLYCOLORSPLIT
+        MENUITEM SEPARATOR
+        MENUITEM "Set Spray Cone",              ID_EDIT_SETSPRAYCONE
+        MENUITEM SEPARATOR
+        MENUITEM "Enable &Volumetric Rendering", ID_REFERENCE_ENABLEVOLUMETRICRENDERING
+        MENUITEM "&Load Volume File",           ID_ANALYSIS_LOADVOLUMEFILE
+        MENUITEM "Create Density Volume",       ID_ANALYSIS_CREATEDENSITYMAP
+        MENUITEM "Volumetric Rendering Options", ID_REFERENCE_VOLUMETRICOPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents\tF1",               ID_HELP_CONTENTS
+        MENUITEM SEPARATOR
+        MENUITEM "&Keyboard Shortcuts",         ID_HELP_KEYBOARDSHORTCUTS
+        MENUITEM "&Command Line Parameters",    ID_HELP_COMMANDLINEPARAMETERS
+        MENUITEM "&About ParticleVis...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPYFRAMEDATA,  VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPYFRAMEDATA,  VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_LOADDATAFILE,   VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_FILE_OPENPARTICLEDESCRIPTOR, VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELP_CONTENTS,       VIRTKEY, NOINVERT
+    "R",            ID_VIEW_DRAWROTATIONALVELOCITYVECTORS, VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_VIEW_TOGGLEVELOCITYVECTORS, VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_VIEW_DRAWPARTICLES,  VIRTKEY, CONTROL, NOINVERT
+END
+
+IDR_CONTROLLER ACCELERATORS 
+BEGIN
+    "Z",            ID_CONTROLLER_PREV,     VIRTKEY, NOINVERT
+    "X",            ID_CONTROLLER_BACK,     VIRTKEY, NOINVERT
+    "C",            ID_CONTROLLER_START,    VIRTKEY, NOINVERT
+    "V",            ID_CONTROLLER_NEXT,     VIRTKEY, NOINVERT
+    "B",            ID_CONTROLLER_LAST,     VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About ParticleVis"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CTEXT           "ParticleVis Version 1.0",IDC_STATIC,30,13,135,10,SS_NOPREFIX | NOT WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,178,14,50,16,WS_GROUP
+    CTEXT           "(c) 2007: Vincent Hoon, Carl Wassgren\r\nUses zlib and libpng libraries.",IDC_STATIC,5,32,169,17,SS_NOPREFIX
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
+END
+
+IDD_CONTROLDIALOG DIALOGEX 0, 0, 176, 98
+STYLE DS_SETFONT | DS_MODALFRAME | DS_NOIDLEMSG | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Control"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "|<",IDC_BUTTONFIRST,2,81,24,15
+    PUSHBUTTON      "<<",IDC_BUTTONPREV,32,81,24,15
+    PUSHBUTTON      "Start",IDC_BUTTONSTART,62,81,52,15
+    PUSHBUTTON      ">>",IDC_BUTTONFWD,120,81,24,15
+    PUSHBUTTON      ">|",IDC_BUTTONLAST,150,81,24,15
+    PUSHBUTTON      "Mark Particle",IDC_BUTTONMARK,6,1,75,14
+    PUSHBUTTON      "Save Frame",IDC_BUTTONSAVE,95,1,75,14
+    CONTROL         "Reverse Play",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,18,56,10
+    CONTROL         "Repeat Play",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,106,18,55,10
+    CONTROL         "",IDC_SLIDERSPEED,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,43,172,11
+    CONTROL         "",IDC_SLIDERPOS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,2,68,172,11
+    LTEXT           "Position:",IDC_STATIC,2,56,28,8
+    LTEXT           "Maximum Speed:",IDC_STATIC,2,30,55,8
+    EDITTEXT        IDC_EDITSPEED,77,30,97,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDITPOS,77,56,97,12,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+END
+
+IDD_DIALOGSCENE DIALOGEX 0, 0, 358, 274
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Scene Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,81,256,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,158,256,50,14
+    DEFPUSHBUTTON   "Apply",ID_APPLY,235,256,50,14
+    EDITTEXT        IDC_EDIT1,112,17,48,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,112,37,48,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,112,57,48,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,112,77,48,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Auto-Configure Camera and Vectors",IDC_BUTTONAUTOCONFIG,12,182,144,14
+    CONTROL         "Use Orthogonal Projection",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,110,100,10
+    CONTROL         "Manual Camera Positioning:",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,124,104,10
+    EDITTEXT        IDC_EDIT8,38,146,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9,79,146,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT10,120,146,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT11,38,162,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT12,79,162,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT13,120,162,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,293,8,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT14,293,23,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITMAXFIELD,293,38,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT6,293,59,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT15,293,74,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT16,293,89,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7,293,104,50,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT17,302,237,50,14,ES_AUTOHSCROLL
+    CONTROL         "Light 1",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,174,165,34,10
+    EDITTEXT        IDC_LIGHTEDIT1X,210,164,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT1Y,242,164,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT1Z,274,164,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT1Z2,308,164,21,14,ES_AUTOHSCROLL
+    CONTROL         "Light 2",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,174,185,34,10
+    EDITTEXT        IDC_LIGHTEDIT2X,210,184,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT2Y,242,184,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT2Z,274,184,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LIGHTEDIT1Z3,308,184,21,14,ES_AUTOHSCROLL
+    CONTROL         "Flip Y-Axis",IDC_YAXISCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,214,49,10
+    CONTROL         "Timestamp",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,62,214,50,10
+    CONTROL         "Show FPS",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,115,214,47,10
+    GROUPBOX        "Camera && View",IDC_STATIC,3,1,164,200
+    LTEXT           "Projection Angle",IDC_STATIC,11,19,53,8
+    LTEXT           "Min Z Distance",IDC_STATIC,11,39,47,8
+    LTEXT           "Max Z Distance",IDC_STATIC,11,59,50,8
+    LTEXT           "Target Distance (radius)",IDC_STATIC,11,79,78,8
+    GROUPBOX        "Particle Vector Parameters",IDC_STATIC,169,1,186,121
+    LTEXT           "Translational Vector Length",IDC_STATIC,180,62,88,8
+    LTEXT           "Marked Path Length",IDC_STATIC,180,107,65,8
+    LTEXT           "Position:",IDC_STATIC,7,149,28,8
+    LTEXT           "Target:",IDC_STATIC,7,165,25,8
+    LTEXT           "X",IDC_STATIC,54,136,8,8
+    LTEXT           "Y",IDC_STATIC,96,136,8,8
+    LTEXT           "Z",IDC_STATIC,139,136,8,8
+    GROUPBOX        "Lighting Parameters",IDC_STATIC,169,123,186,78
+    LTEXT           "Default Alpha Transparency (0..1)",IDC_STATIC,189,239,111,8
+    LTEXT           "X",IDC_STATIC,223,151,8,8
+    LTEXT           "Y",IDC_STATIC,253,151,8,8
+    LTEXT           "Z",IDC_STATIC,285,151,8,8
+    LTEXT           "Light On",IDC_STATIC,174,152,28,8
+    LTEXT           "Bright",IDC_STATIC,307,151,20,8
+    GROUPBOX        "Miscellaneous Options",IDC_STATIC,3,203,164,43
+    LTEXT           "Maximum Rotational Velocity",IDC_STATIC,180,27,92,8
+    LTEXT           "Rotational Vector Length",IDC_STATIC,180,77,80,8
+    LTEXT           "Vector Field Length",IDC_STATIC,180,93,62,8
+    LTEXT           "Maximum Translational Velocity",IDC_STATIC,180,13,100,8
+    LTEXT           "Maximum Field Vector",IDC_STATIC,180,42,70,8
+    PUSHBUTTON      "Load Default Lights",IDC_DEFLIGHT_BUTTON,178,134,78,14
+    CONTROL         "",IDC_L1_PT_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,339,167,11,8
+    CONTROL         "",IDC_L2_PT_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,339,187,11,8
+    LTEXT           "Point",IDC_STATIC,335,151,17,8
+    CONTROL         "X",IDC_RADIO_UPX,"Button",BS_AUTORADIOBUTTON | WS_GROUP,56,95,20,10
+    CONTROL         "Y (default)",IDC_RADIO_UPY,"Button",BS_AUTORADIOBUTTON,86,95,50,10
+    CONTROL         "Z",IDC_RADIO_UPZ,"Button",BS_AUTORADIOBUTTON,140,96,20,10
+    LTEXT           "Up Vector",IDC_STATIC,11,96,32,8
+    EDITTEXT        IDC_AMBIENTEDIT,311,134,40,14,ES_AUTOHSCROLL
+    LTEXT           "Ambience",IDC_STATIC,277,137,32,8
+    EDITTEXT        IDC_EDITLINEWIDTH,302,205,50,14,ES_AUTOHSCROLL
+    LTEXT           "Default Line Width (pixels)",IDC_STATIC,189,207,85,8
+    LTEXT           "Default Point Size (pixels)",IDC_STATIC,189,223,82,8
+    EDITTEXT        IDC_EDITPOINTSIZE,302,221,50,14,ES_AUTOHSCROLL
+    ICON            IDI_ANGLEICON,IDC_STATIC,90,15,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_ZNEARICON,IDC_STATIC,90,35,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_ZFARICON,IDC_STATIC,90,56,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    ICON            IDI_RADIUSICON,IDC_STATIC,90,74,20,20,SS_CENTERIMAGE | SS_REALSIZEIMAGE
+    LTEXT           "Axes Size:",IDC_STATIC,84,230,34,8
+    EDITTEXT        IDC_AXESEDIT,120,227,40,14,ES_AUTOHSCROLL
+    CONTROL         "View-scaled Axes",IDC_AXESCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,229,71,10
+    ICON            IDI_TRANSICON,IDC_STATIC,167,232,20,20
+    ICON            IDI_LINEICON,IDC_STATIC,167,203,20,20
+    ICON            IDI_POINTICON,IDC_STATIC,167,218,20,20
+END
+
+IDD_DIALOGIMAGE DIALOGEX 0, 0, 266, 205
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Saving Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,77,187,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,138,187,50,14
+    CONTROL         "Save to PNG Files",IDC_CHECKPNG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,72,10
+    GROUPBOX        "Image Options",IDC_STATIC,19,18,240,74,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT1,33,41,180,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE,215,41,37,14
+    EDITTEXT        IDC_EDIT2,125,60,34,14,ES_AUTOHSCROLL
+    CONTROL         "Dump ASCII Data",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,97,78,72,10
+    CONTROL         "Save to AVI File",IDC_CHECKAVI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,94,67,10
+    EDITTEXT        IDC_AVIFILEEDIT,33,127,110,13,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Browse...",IDC_BROWSE2,146,127,37,14
+    PUSHBUTTON      "Set Compression",IDC_BUTTONCOMP,188,127,66,14,WS_DISABLED
+    EDITTEXT        IDC_EDITFPS,103,144,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_DIMCOMBO,188,144,67,64,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Automatically save each frame during playback",IDC_CHECK1,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,49,170,166,10
+    LTEXT           "Path to save images to:",IDC_STATIC,35,29,77,8
+    LTEXT           "Current file number:",IDC_STATIC,57,63,66,8
+    GROUPBOX        "AVI Options",IDC_STATIC,19,105,240,58,0,WS_EX_TRANSPARENT
+    LTEXT           "AVI Filename:",IDC_STATIC,35,116,45,8
+    LTEXT           "Frames per second:",IDC_STATIC,35,146,64,8
+    LTEXT           "Dimensions:",IDC_STATIC,147,146,39,8
+END
+
+IDD_BOUNDSDIALOG DIALOGEX 0, 0, 183, 130
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Bounds"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT1,43,14,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,86,14,40,14,ES_AUTOHSCROLL
+    CONTROL         "Enable X",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,133,16,43,10
+    EDITTEXT        IDC_EDIT2,43,33,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,86,33,40,14,ES_AUTOHSCROLL
+    CONTROL         "Enable Y",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,133,35,43,10
+    EDITTEXT        IDC_EDIT3,43,52,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT6,86,52,40,14,ES_AUTOHSCROLL
+    CONTROL         "Enable Z",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,133,54,43,10
+    DEFPUSHBUTTON   "OK",IDOK,37,111,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,96,111,50,14
+    LTEXT           "X Bounds",IDC_STATIC,7,16,30,8
+    LTEXT           "Y Bounds",IDC_STATIC,7,36,30,8
+    LTEXT           "Z Bounds",IDC_STATIC,7,56,30,8
+    LTEXT           "Min",IDC_STATIC,57,3,12,8
+    LTEXT           "Max",IDC_STATIC,98,3,14,8
+    CONTROL         "Draw bounded particles transparently",IDC_TRANSCHECK,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,76,137,10
+    ICON            IDI_BOUNDICON,IDC_STATIC,13,71,20,20
+    CONTROL         "Mark bounded particles each frame",IDC_MARKCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,91,128,10
+END
+
+IDD_KEYSDIALOG DIALOGEX 0, 0, 126, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Shortcut Keys"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,38,122,50,14
+    LTEXT           "1-5:\tSet Geometry Quality\r\nL:\tToggle Lighting\r\nT:\tToggle Texturing\r\n\r\nZ:\tFirst Frame\r\nX:\tPrevious Frame\r\nC:\tStart/Stop\r\nV:\tNext Frame\r\nB:\tLast Frame\r\n\r\nP:\tPick a particle to mark\r\nF:\tFollow a particle\r\nS:\tSave current frame",IDC_STATIC,7,7,112,103
+END
+
+IDD_METAPOSDIALOG DIALOGEX 0, 0, 101, 130
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Positioner"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Camera Position",IDC_CAMPOS,"Button",BS_AUTORADIOBUTTON | WS_GROUP,7,15,86,10
+    CONTROL         "Camera Target",IDC_CAMTARG,"Button",BS_AUTORADIOBUTTON,7,27,86,10
+    PUSHBUTTON      "Force Camera Position",IDC_BUTTON2,7,40,86,14
+    CONTROL         "Draw Camera Cone",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,58,78,10
+    PUSHBUTTON      "Set Cone Angle",IDC_BUTTON1,7,69,61,15
+    EDITTEXT        IDC_CANGLE,70,69,24,14,ES_AUTOHSCROLL
+    CONTROL         "Light 1 Vector",IDC_L1DIR,"Button",BS_AUTORADIOBUTTON,7,86,86,10
+    CONTROL         "Light 2 Vector",IDC_L2DIR,"Button",BS_AUTORADIOBUTTON,7,98,86,10
+    CONTROL         "Regular (Viewing) Mode",IDC_RADIOREGULAR,"Button",BS_AUTORADIOBUTTON,7,116,88,10
+    GROUPBOX        "Adjustment Mode",IDC_STATIC,2,2,97,127,WS_GROUP
+END
+
+IDD_SPRITEDIALOG DIALOGEX 0, 0, 186, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Point Sprites Tuner"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_BSIZE,147,4,35,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    CONTROL         "",IDC_SLIDERSIZE,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,46,4,99,15
+    LTEXT           "Base Size",IDC_STATIC,3,7,31,8
+    EDITTEXT        IDC_P1,147,22,35,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    CONTROL         "",IDC_SLIDERQUAD,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,46,43,99,15
+    LTEXT           "Linear Atten.",IDC_STATIC,3,25,43,8
+    EDITTEXT        IDC_P2,147,43,35,14,ES_AUTOHSCROLL | ES_WANTRETURN
+    CONTROL         "",IDC_SLIDERLIN,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,46,22,99,15
+    LTEXT           "Quad. Atten.",IDC_STATIC,3,46,44,8
+END
+
+IDD_DIALOGRANDOM DIALOGEX 0, 0, 135, 63
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Random Frame"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_PNUMBER,80,7,48,14,ES_AUTOHSCROLL
+    CONTROL         "Normal Distribution",IDC_NORMALCHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,26,76,10
+    DEFPUSHBUTTON   "OK",IDOK,10,42,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,74,42,50,14
+    LTEXT           "Number of Particles:",IDC_STATIC,7,10,66,8
+END
+
+IDD_STEREODIALOG DIALOGEX 0, 0, 228, 46
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Stereo Tuner"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_FOCALSLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,45,7,153,15
+    CONTROL         "",IDC_EYESLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,45,24,153,15
+    LTEXT           "Focal Length",IDC_STATIC,3,10,42,8
+    LTEXT           "Eye Sep",IDC_STATIC,11,25,27,8
+    EDITTEXT        IDC_FOCALEDIT,200,6,25,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EYEEDIT,199,24,25,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_DIALOGINPUT DIALOGEX 0, 0, 115, 68
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Input Value"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDITNUM,23,25,68,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,7,46,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,58,46,50,14
+    EDITTEXT        IDC_EDITTEXT,7,7,101,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+END
+
+IDD_GRAPHDIALOG DIALOGEX 0, 0, 244, 90
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Graph Properties"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,71,69,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,125,69,50,14
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,95,7,106,15
+    LTEXT           "Background Transparency",IDC_STATIC,7,10,84,8
+    EDITTEXT        IDC_BGEDIT,202,7,35,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+    PUSHBUTTON      "Set Data Color",IDC_BUTTON1,45,44,69,14
+    PUSHBUTTON      "Set Graph Color",IDC_BUTTON3,129,45,69,14
+    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,95,23,106,15
+    LTEXT           "Font Size",IDC_STATIC,7,26,30,8
+    EDITTEXT        IDC_FONTSIZEEDIT,202,23,35,14,ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER
+END
+
+IDD_GRADIENTDIALOG DIALOGEX 0, 0, 220, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Gradient Creator"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Pick New Color",IDC_PICKCOLORBUTTON,104,21,81,14
+    EDITTEXT        IDC_RESEDIT,111,37,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add Color",IDC_ADDBUTTON,48,54,59,14
+    PUSHBUTTON      "Remove Color",IDC_REMOVEBUTTON,111,54,59,14
+    DEFPUSHBUTTON   "OK",IDOK,58,130,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,130,50,14
+    CONTROL         "",IDC_STATICGRAD,"Static",SS_OWNERDRAW,10,71,200,40,WS_EX_TRANSPARENT
+    CONTROL         "",IDC_MYBOX,"Static",SS_BITMAP,85,21,15,13
+    LTEXT           "Current Color:",IDC_STATIC,34,23,47,8
+    LTEXT           "Number of Generated Colors:",IDC_STATIC,14,39,95,8
+    EDITTEXT        IDC_STATUSEDIT,10,114,97,14,ES_READONLY | NOT WS_BORDER
+    EDITTEXT        IDC_STATUSEDIT2,116,114,97,14,ES_READONLY | NOT WS_BORDER
+    PUSHBUTTON      "",IDC_LOADBUTTON,7,2,14,14,BS_ICON
+    PUSHBUTTON      "",IDC_SAVEBUTTON,23,2,14,14,BS_ICON
+END
+
+IDD_DIALOGSURFACEMAP DIALOGEX 0, 0, 186, 76
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Surface Map Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Linear",IDC_RADIOLIN,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,16,22,35,10
+    CONTROL         "Logarithmic",IDC_RADIOLOG,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,57,22,52,10
+    CONTROL         "Square root",IDC_RADIOSQR,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,114,22,54,10
+    EDITTEXT        IDC_EDITSCALE,95,37,43,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,43,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,96,55,50,14
+    LTEXT           "Maximum Surface Value:",IDC_STATIC,7,39,79,8
+    LTEXT           "Mapping Type:",IDC_STATIC,7,11,48,8
+END
+
+IDD_DIALOGSLICES DIALOGEX 0, 0, 191, 146
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Volumetric Rendering Setup"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDITALPHA,57,7,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITSIZE,57,24,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITSLICES,57,41,40,14,ES_AUTOHSCROLL
+    CONTROL         "Use dummy data",IDC_CHECKDUMMY,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,110,8,69,10
+    CONTROL         "Normalize each slice",IDC_CHECKNORM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,110,20,79,10
+    CONTROL         "Normalize slice alpha",IDC_CHECKNORMALPHA,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,110,32,81,10
+    CONTROL         "Additive blend",IDC_CHECKADD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,110,45,61,10
+    EDITTEXT        IDC_EDITX,55,70,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITY,83,70,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZ,111,70,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITX2,55,87,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITY2,83,87,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZ2,111,87,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITX3,55,104,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITY3,83,104,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITZ3,111,104,25,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,46,125,42,14
+    PUSHBUTTON      "Cancel",IDCANCEL,99,125,42,14
+    LTEXT           "X",IDC_STATIC,68,60,8,8
+    LTEXT           "Y",IDC_STATIC,95,60,8,8
+    LTEXT           "Z",IDC_STATIC,122,60,8,8
+    LTEXT           "Origin:",IDC_STATIC,26,72,22,8
+    LTEXT           "Slice Size:",IDC_STATIC,16,26,32,8
+    LTEXT           "# of slices:",IDC_STATIC,12,42,36,8
+    LTEXT           "Max Alpha:",IDC_STATIC,11,8,37,8
+    LTEXT           "Rotation:",IDC_STATIC,17,89,31,8
+    LTEXT           "Scale:",IDC_STATIC,27,107,20,8
+END
+
+IDD_VECTORSCALER DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Vector Length Scaler"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDERTRANS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,47,4,99,15
+    EDITTEXT        IDC_BSIZE,147,4,35,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    CONTROL         "",IDC_SLIDERROT,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,47,23,99,15
+    EDITTEXT        IDC_P1,147,23,35,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    CONTROL         "",IDC_SLIDERFIELD,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,47,42,99,15
+    EDITTEXT        IDC_P2,147,42,35,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    LTEXT           "Trans. Vectors",IDC_STATIC,1,7,48,8
+    LTEXT           "Rot. Vectors",IDC_STATIC,1,26,41,8
+    LTEXT           "Field Vectors",IDC_STATIC,1,45,42,8
+    PUSHBUTTON      "OK",IDC_BUTTONOK,65,79,56,14
+    CONTROL         "",IDC_SLIDERPATH,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,47,61,99,15
+    EDITTEXT        IDC_P4,147,61,35,14,ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN
+    LTEXT           "Path Length",IDC_STATIC,1,65,40,8
+END
+
+IDD_VISDIALOG DIALOGEX 0, 0, 123, 122
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Visibility Selector"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Hide Selected Particles",IDC_CHECK_HIDE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,5,88,10
+    CONTROL         "Mark Selected Particles",IDC_CHECK_MARK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,17,89,10
+    CONTROL         "Flag Non-Transparency",IDC_CHECK_TRANS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,30,91,10
+    CONTROL         "Select Visible Particles",IDC_RADIO_USEVIS,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,8,45,85,10
+    CONTROL         "Select Occluded Particles",IDC_RADIO_USEOCC,"Button",BS_AUTORADIOBUTTON | WS_TABSTOP,8,56,95,10
+    PUSHBUTTON      "Select Entire View (.)",IDC_BUTTONSELECT,2,70,118,14
+    PUSHBUTTON      "Invert Marking",IDC_BUTTONINVERT,2,105,60,14
+    PUSHBUTTON      "Reset States",IDC_BUTTONRESET,63,105,57,14
+    PUSHBUTTON      "?",IDC_BUTTON4,111,1,11,11
+    GROUPBOX        "",IDC_STATIC,0,99,123,23
+    PUSHBUTTON      "Select Region (;)",IDC_BUTTONSELECT2,2,86,118,14
+END
+
+IDD_ANALYSIS_DIALOG DIALOGEX 0, 0, 110, 225
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Analysis Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_PID,14,19,46,14,ES_AUTOHSCROLL
+    CONTROL         "X Coordinate",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,26,52,57,10
+    CONTROL         "Y Coordinate",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,26,64,57,10
+    CONTROL         "Z Coordinate",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,26,76,57,10
+    CONTROL         "X Velocity",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,26,104,47,10
+    CONTROL         "Y Velocity",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,26,116,47,10
+    CONTROL         "Z Velocity",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,26,128,47,10
+    CONTROL         "Eta-Dot",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,26,157,41,10
+    CONTROL         "Xi-Dot",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON,26,169,35,10
+    CONTROL         "Lambda-Dot",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,26,181,55,10
+    DEFPUSHBUTTON   "OK",IDOK,5,203,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,52,203,45,14
+    LTEXT           "Particle ID:",IDC_STATIC,7,8,36,8
+    GROUPBOX        "Angular Velocity",IDC_STATIC,15,145,80,50
+    GROUPBOX        "Translational Velocity",IDC_STATIC,15,92,80,50
+    GROUPBOX        "Translation",IDC_STATIC,15,40,80,50
+    ICON            IDI_GRAPHICON,IDC_STATIC,70,16,21,20
+END
+
+IDD_COLORSDIALOG DIALOGEX 0, 0, 200, 110
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Interface Colors"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,68,91,64,15
+    PUSHBUTTON      "Background Color",IDC_BGCBUTTON,26,8,83,15
+    PUSHBUTTON      "Set Marking Color",IDC_MARKCBUTTON,25,49,83,15
+    PUSHBUTTON      "Console Text Color",IDC_TEXTCBUTTON,25,28,83,15
+    CONTROL         "Disable Mark Color",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,113,52,75,10
+    ICON            IDI_MARKICON,IDC_STATIC,1,46,21,20,SS_CENTERIMAGE
+    ICON            IDI_TEXTICON,IDC_STATIC,3,25,21,20
+    ICON            IDI_BGICON,IDC_STATIC,2,5,21,20,SS_CENTERIMAGE
+    PUSHBUTTON      "Pathline Start Color",IDC_BUTTON_PSTART,25,70,83,15
+    ICON            IDI_PATHICON,IDC_STATIC,0,68,21,20,SS_CENTERIMAGE
+    PUSHBUTTON      "Pathline End Color",IDC_BUTTON_PEND,110,70,83,15
+END
+
+IDD_DIALOGSPLIT DIALOGEX 0, 0, 145, 92
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Color Pattern"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "X",IDC_RADIO_X,"Button",BS_AUTORADIOBUTTON | WS_GROUP,40,7,20,10
+    CONTROL         "Y",IDC_RADIO_Y,"Button",BS_AUTORADIOBUTTON,70,7,20,10
+    CONTROL         "Z",IDC_RADIO_Z,"Button",BS_AUTORADIOBUTTON,101,7,20,10
+    EDITTEXT        IDC_EDITOX,32,22,34,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITOY,68,22,34,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDITOZ,104,22,34,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,15,72,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,78,72,50,14
+    LTEXT           "   Origin:",IDC_STATIC_OTEXT,2,25,28,8
+    LTEXT           "Axis:",IDC_STATIC,13,6,17,8
+    PUSHBUTTON      "Pick Color 1",IDC_BUTTONCOLOR1,30,45,52,14
+    PUSHBUTTON      "Pick Color 2",IDC_BUTTONCOLOR2,86,45,52,14
+    ICON            IDI_SPLITICON,IDC_STATIC_ICON,5,42,21,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "Vincent Hoon, Carl Wassgren"
+            VALUE "CompanyName", "Purdue University"
+            VALUE "FileDescription", "PVis: A Particle Visualization Application"
+            VALUE "FileVersion", "1.0"
+            VALUE "InternalName", "ParticleVis.exe"
+            VALUE "OriginalFilename", "ParticleVis.exe"
+            VALUE "ProductName", "Particle Visualizer"
+            VALUE "ProductVersion", "1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_CONTROLDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 168
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 91
+    END
+
+    IDD_DIALOGSCENE, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 267
+    END
+
+    IDD_DIALOGIMAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 259
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 198
+    END
+
+    IDD_BOUNDSDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 124
+    END
+
+    IDD_KEYSDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 119
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_METAPOSDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 94
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+
+    IDD_SPRITEDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_DIALOGRANDOM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_STEREODIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DIALOGINPUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 60
+    END
+
+    IDD_GRAPHDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 237
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+
+    IDD_GRADIENTDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 213
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_DIALOGSURFACEMAP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
+
+    IDD_DIALOGSLICES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 184
+        VERTGUIDE, 46
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_VECTORSCALER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_VISDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 120
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 117
+    END
+
+    IDD_ANALYSIS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 103
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 217
+    END
+
+    IDD_COLORSDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 193
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 103
+    END
+
+    IDD_DIALOGSPLIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 138
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 86
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+IDR_MANIFEST            RT_MANIFEST             "res\\ParticleVis.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 17
+BEGIN
+    BUTTON      ID_BUTTON32876
+    BUTTON      ID_BUTTON32878
+    BUTTON      ID_BUTTON32881
+    SEPARATOR
+    BUTTON      ID_BUTTON32872
+    BUTTON      ID_BUTTON32874
+    SEPARATOR
+    BUTTON      ID_BUTTON32879
+    BUTTON      ID_BUTTON32880
+    BUTTON      ID_BUTTON32877
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "ParticleVis"
+    ID_FILE_LOADDATAFILE    "Open a new file of particle data."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "ParticleVis"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_START                "Start Animation"
+    ID_STOP                 "Stop Animation"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_LOADCOLOR       "Load a color map file into existing scene."
+    ID_FILE_LOADTEXTUREMAP  "Load a new texture for particles."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_USETABLETGEOMETRY 
+                            "When new files are loaded, use tablets instead of spheres."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\ParticleVis.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

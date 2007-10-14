@@ -1,0 +1,29 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Vector Field File</B></font></p></td>
+  </tr>
+</table>
+<P>The vector file format allows specification of a field of vectors.  Each vector is specified by a point of origin and the vector itself; this may also be thought of as a "head point" in global coordinates and a "tail point" that is specified relative to the head.</P>
+<DL>
+	<DT><B>Vectorfile Information</B></DT>
+	<DD>
+		* time<BR>
+		x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz (for each particle)<BR>
+		x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz<BR>
+		x &nbsp;&nbsp; y &nbsp;&nbsp;  z &nbsp;&nbsp; dx &nbsp;&nbsp; dy &nbsp;&nbsp; dz<BR><BR>
+
+		* time + 1<BR>
+		...<BR><BR>
+		
+		* time + 2<BR>
+		...<BR>
+		...<BR>
+		...<BR><BR>
+
+		The number of lines in each frame may be varied arbitrarily.  Each line corresponds to a single vector, where (x, y, z) is a point in global coordinates, and (dx, dy, dz) is a vector at that point.  Vector color is classified using the current gradient.  To adjust the color scale and size of the vectors, you can use the scene options dialog and the vector resizer under View.
+</DL>
+</BODY>
+</HTML>

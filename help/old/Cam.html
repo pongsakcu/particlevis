@@ -1,0 +1,23 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>Camera Control</B></font></p></td>
+  </tr>
+</table>
+<P>The viewpoint in PVis is controlled primarily by mouse input.  The user can rotate, translate, and zoom the camera object.  The camera is setup in a manner similar to the standard "arcball" configuration: the camera orbits spherically around a target centerpoint, and dragging  the mouse allows you to manipulate the orientation and position of the sphere.</P>
+<P><B>Drag Left Mouse Button:</B> Rotate the camera sphere.  Essentially this spins the entire scene around a specified target point.  This allows you to easily swing the camera around for viewing the data from an alternate angle.  The camera will always orient itself such that "up" is in the same direction.</P>
+<IMG SRC=SphereA.gif>
+<P><B>Drag Right Mouse Button:</B> Translate the target point on the X-Z plane.  This shifts the entire scene, translating the camera and the target point along the horizontal XZ plane.</P>
+<IMG SRC=SphereB.gif>
+<P><B>Drag Middle Mouse Button:</B> If you have a 3-button mouse, you can use the middle button to translate the entire scene on the X-Y plane as well.</P>
+<P><B>Drag Left + Right Mouse Button:</B> Move the camera in/out of the scene.  This effectively decreases the radius of rotation until the camera is right on top of the target point.  It is not "zooming" in the conventional sense since the camera position itself is moving.  To narrow the angle of view of the camera and achieve fixed-position zooming, modify the "Projection Angle" in the Scene Options Dialog (Edit Menu).</P>
+<IMG SRC=SphereC.gif>
+<P><B>Mouse Wheel:</B> The mouse wheel moves the camera in and out exactly as the Left + Right drag described above.</P>
+<P><B>Continous Rotation</B><BR>To cause the entire scene to rotate with every rendered frame, press the <B>Page Up</B> key.  Each keypress will add velocity to the camera sphere in a clockwise direction.  Pressing <B>Page Down</B> will subtract velocity from the sphere.</P><BR>
+<P><B>Set Position Menu</B><BR>Under the Edit menu you will find a "Set Camera Position" submenu that allows you to place the camera directly on the X, Y, or Z axes.  You can also engage the "Follow Particle" camera mode, which allows you to lock the camera target onto a chosen particle (pressing 'f' will also engage this mode).  As the simulation runs the camera will move along with the particle.  To release this mode select the follow menu command again or press the 'f' key.</P>
+<IMG src=projection.png>
+<P>The final camera parameter is the "Toggle Projection" command.  This command switches between two methods of projecting the 3-D scene onto the 2-D viewing surface.  The default camera view is a perspective projection: the camera's viewing space is a frustrum matching the Z-depths and angle of view set in the Scene Options dialog.  The camera in this mode is essentially a pinhole camera.  Toggling the mode will switch the view to an orthogonal projection, where parallel lines remain parallel and there are no distance effects.  While the perspective projection matches the eye's perception more closely, the parallel projection is often superior for purposes of analysis.</P>
+</BODY>
+</HTML>

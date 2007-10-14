@@ -1,0 +1,6 @@
+body { font-family: verdana, arial, 'sans serif'; font-size:11pt;}
+p {
+  margin-bottom: 0.5em }
+p + p {
+  text-indent: 1.5em;
+  margin-top: 0 }

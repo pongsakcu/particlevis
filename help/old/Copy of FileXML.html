@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="50" valign="middle"><img src=PVisIcon.png align=middle></td>
+    <td valign="middle"><p><font size="+2">&nbsp;<B>XML Geometry File Format</B></font></p></td>
+  </tr>
+</table>
+<P>In order to describe the geometry of each particle rendered in the application, an XML-based file format is used.  This format allows you to use simple plaintext to hierarchically describe the appearance of a loaded state file.  Using the various tags and attributes, arbitrary geometry composed of primitive objects may be assigned uniquely to each particle.</P>
+<P>The general structure of the XML file takes the form:<BR>
+<pre>&lt;particleset&gt;<br />	&lt;particle&gt; ... &lt;/particle&gt;<br />	&lt;particle&gt; ... &lt;/particle&gt;<br />	&lt;particle&gt; ... &lt;/particle&gt;<br />	&lt;particle&gt; ... &lt;/particle&gt;<br />		.<br />		.<br />		.<br />		.<br />	&lt;particle&gt; ... &lt;/particle&gt;<br />&lt;/particleset&gt;</pre>
+
+The number of particles tags should correspond to the number of particles that will be maximally present in the system, unless the "count" attribute is used (described below).  The order of both the XML specification and the state file input are implicitly assumed to match, so no explicit particle ID is employed.
+</P>
+<P><B>Particle Tag</B><BR>
+The &lt;particle&gt; tag is the basic unit containing particle information.  It supports several attributes within the tag.
+<DL>
+	<DT>Inverted</DT>
+	<DD>Specifying inverted="true" indicates that the object should be rendered "inside-out," so that the back faces are rendered instead of the front faces (for use in "cutaway" views).  inverted="false," the default, renders the object normally.</DD>
+	<DT>Count</DT>
+	<DD>Indicates the number of particles from the input data to apply this descriptor to.  This variable defaults to 1, and allows for simpler input of large groups of homogenous particles.  For example, if you wished to specify 4001 particles, you could set count="4000" for the first particle tag, and then specify the 4001th particle in the following tag.</DD>
+	<DT>Transparent</DT>
+	<DD>Setting transparent="false" will force the particle to be drawn as a solid object even when transparency is enabled in the renderer.  This allows mixing of transparent and solid shaded particles within the visualization.  The default is transparent="true."  This setting only has an effect when transparency is enabled (View menu).</DD>
+	<DT>Quality</DT>
+	<DD>Setting quality equal to a nonzero integer value will modify the level of detail algorithm within PVis to draw the particle at a higher or lower level of geometric detail.  For example, setting quality="2" would render a particle at 2 levels of detail higher than normal.  Thus if the Geometry Quality (View menu) was set at "Medium" the particle would be rendered as if its quality was set on "Very High."  The renderer supports seven internal levels of detail, and all rendering is clamped to this range.</DD>
+	<DT>RGB Color</DT>
+	<DD>Setting the three color attributes, r="?", g="?", and b="?", will assign the particle an initial color that will be used in place of white or any other assigned scheme.  Loading a color map may destroy this setting.</DD>
+</DL>
+</P>
+<P><B>Geometry Primitives</B><BR>
+<IMG SRC=geometry.png align=right>
+Within the &lt;particle&gt; tag, geometry tags may be placed in any order to specify particle appearance.  Each of these tags accepts one or more inner tags that specify the dimensions and properties of the primitive.  These tags are:
+<DL>
+	<DT>Sphere &lt;radius&gt;</DT>
+	<DD>A sphere centered on the origin, with specified radius.  A sphere of radius 0 is considered a point.</DD>
+	<DT>Cylinder &lt;radius&gt;, &lt;length&gt;</DT>
+	<DD>A cylinder of specified radius centered on the origin, extending the specified length in the Z direction.  A cylinder with a radius of 0 is considered a line.</DD>
+	<DT>Cone &lt;small_radius&gt;, &lt;large_radius&gt;, &lt;half_angle&gt;</DT>
+	<DD>A cone with specified large radius and small radius, with a half angle to determine height.  The tip of the cone is at the origin.</DD>
+	<DT>Cap &lt;radius&gt;, &lt;height&gt;</DT>
+	<DD>A spherical cap.  The specified radius is not the original sphere's radius but the resulting cap's radius.  The height indicates the depth of the figure in the Z direction.  If height=0 then the cap is rendered as a disk.</DD>
+	<DT>Plate &lt;corner1&gt;, &lt;corner2&gt;, &lt;corner3&gt;, &lt;corner4&gt;</DT>
+	<DD>A quadrilateral formed from the four specified corners.  Each &lt;corner&gt; tag contains a set XYZ tags as in the position tag described below.  If the plate is not planar it will be rendered as two connected triangles.</DD>
+	<DT>File &lt;filename&gt;</DT>
+	<DD>A file tag allows the user to specify the filename of a file that contains a list of triangles to be used by the renderer.  This allows the user to specify completely novel shapes derived from external sources.</DD>
+	<DT>Flipsurface</DT>
+	<DD>Flipsurface does not represent a primitive, but rather a geometric operation.  Placing other geometric primitives inside a set of &lt;flipsurface&gt; ... &lt;/flipsurface&gt; tags will cause any computed surfaces to be "uninverted."  This only applies when the face culling has been enabled using the inverted attribute inside the base &lt;particle&gt; tag.</DD>
+</DL>
+</P>
+<P><B>Positioning Primitives</B><BR>
+	Each of these geometry tags can be nested not only with the given dimension variables, but a &lt;position&gt; and/or &lt;rotation&gt; tag.  These optional tags take the form:<BR>
+<pre>
+<p>&lt;position&gt;
+	&lt;x&gt;?&lt;/x&gt;
+	&lt;y&gt;?&lt;/y&gt;
+	&lt;z&gt;?&lt;/z&gt;
+&lt;/position&gt;</p><p>and</p>&lt;rotation&gt;<br />	&lt;eta&gt;?&lt;/eta&gt;<br />	&lt;xi&gt;?&lt;/xi&gt;<br />	&lt;lambda&gt;?&lt;/lambda&gt;<br />&lt;/rotation&gt;
+</pre>
+	The &lt;position&gt; tag shifts the origin of the figure to the specified coordinate point.  The &lt;rotation&gt; tag transforms the figure by a set of Euler-angle rotations as given in the tag.
+</P>
+<P><B>Notes</B><BR>
+See the XML files provided with PVis for additional examples.  All tags in the XML geometry specification are assumed to contain floating point values and are parsed as such.  The internal XML parser does not validate the XML input, but an XML document type descriptor file is supplied for convenience.  If, after loading both the state file and the XML file, the count of particles in the XML file does not match the number of particles loaded from the state file, the final &lt;particle&gt; tag is used to represent all unspecified particles.  Thus, if one were to specify only a single &lt;particle&gt; tag it would be applied to all loaded particles.</P>
+</BODY>
+</HTML>
