@@ -1,4 +1,4 @@
-#summary News and updates related to ParticleVis.
+#summary The ParticleVis Wiki
 
 = News and Updates =
 
